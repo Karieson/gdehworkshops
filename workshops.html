@@ -1,0 +1,202 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GDEH Application Form</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet"><style>
+body{
+    body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: #000000;
+    color: white;
+    font-size: 11px;
+}
+}
+
+header{
+    position:relative;
+    padding:10px;
+}
+
+.logo{
+    position:absolute;
+    top:10px;
+    left:10px;
+}
+
+.logo img{
+    width:160px;
+}
+
+h2{
+    h2 {
+    color: white;
+}
+    font-size:12px;
+    font-weight:600;
+    text-align:center;
+    margin-top:90px;
+    padding:0 10px;
+}
+
+.note{
+    text-align:center;
+    font-size:10px;
+    color:#ffcc00;
+    margin-top:5px;
+}
+
+form{
+    max-width:600px;
+    margin:auto;
+    padding:15px;
+}
+
+fieldset{
+    border:1px solid rgba(255,255,255,0.3);
+    margin-bottom:15px;
+    padding:10px;
+}
+
+legend{
+    font-size:11px;
+}
+
+label{
+    display:block;
+    margin-top:8px;
+    font-size:10px;
+}
+
+input,select{
+    width:100%;
+    padding:6px;
+    font-size:10px;
+    font-family:'Poppins',sans-serif;
+}
+
+button {
+    width: auto;
+    padding: 5px 10px;
+    font-size: 10px;
+    border: none;
+    border-radius: 4px;
+    background: #1e90ff;
+    color: white;
+    cursor: pointer;
+}
+button {
+    display: block;
+    margin: 10px auto;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+}
+
+button:disabled{
+    background:gray;
+    cursor:not-allowed;
+}
+
+#paymentSection{
+    max-width:600px;
+    margin:auto;
+    padding:15px;
+}
+
+footer{
+    text-align:center;
+    font-size:10px;
+    padding:15px;
+    border-top:1px solid rgba(255,255,255,0.2);
+    margin-top:20px;
+}
+</style></head><body><header>
+    <div class="logo">
+        <img src="gdeh_logo.png" alt="GDEH Logo">
+    </div>
+</header><h2>Garissa Digital Empowerment Hub CBO Workshops Application Form</h2>
+<div class="note">Applicant must verify payment before submitting</div><form id="applicationForm"><fieldset>
+<legend>Personal Information</legend><label>First Name</label> <input type="text" required>
+
+<label>Last Name</label> <input type="text" required>
+
+<label>Gender</label> <select required>
+
+<option value="">Select</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+</select><label>Marital Status</label> <select>
+
+<option>Single</option>
+<option>Married</option>
+<option>Divorced</option>
+<option>Other</option>
+</select><label>Date of Birth</label> <input type="date" required>
+
+<label>Email Address</label> <input type="email" required>
+
+<label>Address</label> <input type="text">
+
+<label>Date of Application</label> <input type="date" required>
+
+<label>Phone Number</label> <input type="tel" required>
+
+<label>Type of National Identity</label> <select required>
+
+<option value="">Select</option>
+<option>Alien</option>
+<option>National ID</option>
+<option>Passport</option>
+<option>Birth Certificate</option>
+</select><label>KRA PIN (Optional)</label> <input type="text">
+
+</fieldset><fieldset>
+<legend>Emergency Contact 1</legend>
+<label>Full Name</label>
+<input type="text" required>
+<label>Phone Number</label>
+<input type="tel" required>
+<label>Relationship</label>
+<input type="text" required>
+</fieldset><fieldset>
+<legend>Emergency Contact 2</legend>
+<label>Full Name</label>
+<input type="text" required>
+<label>Phone Number</label>
+<input type="tel" required>
+<label>Relationship</label>
+<input type="text" required>
+</fieldset><label>
+<input type="checkbox" required>
+I agree to the terms and conditions.
+</label><button type="submit" id="submitBtn" disabled>Submit Application</button>
+
+</form><div id="paymentSection">
+<h3 style="color:#1e90ff;">Payment Instructions</h3>
+<p><strong>Pay Bill:</strong> 403070</p>
+<p><strong>Business Number:</strong> ID / Birth Certificate / Passport</p>
+<p><strong>Amount:</strong> KSh 300</p><label>M-Pesa Confirmation Code</label> <input type="text" id="mpesaCode" placeholder="Enter transaction code">
+
+<button onclick="verifyPayment()">Verify Payment</button>
+
+</div><footer>
+© 2026 Garissa Digital Empowerment Hub CBO | All Rights Reserved
+</footer><script>
+function verifyPayment(){
+    let code=document.getElementById('mpesaCode').value;
+    let btn=document.getElementById('submitBtn');
+
+    if(code.length>5){
+        alert('Payment verified successfully');
+        btn.disabled=false;
+    }else{
+        alert('Enter valid M-Pesa code');
+    }
+}
+</script></body>
+</html>
