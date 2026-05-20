@@ -1,56 +1,69 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GDEH Application Form</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet"><style>
-body{
-    body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Poppins', sans-serif;
-    background: #000000;
-    color: white;
-    font-size: 11px;
-}
+<title>GDEH Application Form</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
+body{
+    font-family:'Poppins',sans-serif;
+    background:#000;
+    color:white;
+    font-size:11px;
+    padding:20px;
+}
+
+/* HEADER */
 header{
     position:relative;
-    padding:10px;
+    padding-bottom:20px;
 }
 
 .logo{
-    position:absolute;
-    top:10px;
-    left:10px;
+    text-align:left;
 }
 
 .logo img{
     width:160px;
 }
-
-h2{
-    h2 {
-    color: white;
+.main-box{
+    max-width:700px;
+    margin:20px auto;
+    border:3px solid #cc7000;
+    padding:20px;
+    border-radius:10px;
+    background:rgba(204,112,0,0.08);
 }
-    font-size:12px;
+
+/* TITLE */
+h2{
+    color:white;
+    font-size:14px;
     font-weight:600;
     text-align:center;
-    margin-top:90px;
-    padding:0 10px;
+    margin-bottom:10px;
 }
 
 .note{
     text-align:center;
     font-size:10px;
     color:#ffcc00;
-    margin-top:5px;
+    margin-bottom:20px;
 }
 
+/* FORM */
 form{
-    max-width:600px;
-    margin:auto;
-    padding:15px;
+    width:100%;
 }
 
 fieldset{
@@ -61,39 +74,46 @@ fieldset{
 
 legend{
     font-size:11px;
+    padding:0 5px;
+    color:orange;
 }
 
 label{
     display:block;
     margin-top:8px;
+    margin-bottom:3px;
     font-size:10px;
 }
 
-input,select{
+.required{
+    color:red;
+}
+
+input,
+select{
     width:100%;
-    padding:6px;
+    padding:7px;
     font-size:10px;
     font-family:'Poppins',sans-serif;
+    border:none;
+    border-radius:4px;
 }
 
-button {
-    width: auto;
-    padding: 5px 10px;
-    font-size: 10px;
-    border: none;
-    border-radius: 4px;
-    background: #1e90ff;
-    color: white;
-    cursor: pointer;
-}
-button {
-    display: block;
-    margin: 10px auto;
+/* BUTTONS */
+button{
+    display:block;
+    margin:15px auto;
+    padding:7px 15px;
+    font-size:10px;
+    border:none;
+    border-radius:4px;
+    background:#1e90ff;
+    color:white;
+    cursor:pointer;
 }
 
-button:hover {
-    opacity: 0.85;
-}
+button:hover{
+    opacity:0.85;
 }
 
 button:disabled{
@@ -101,12 +121,31 @@ button:disabled{
     cursor:not-allowed;
 }
 
+/* PAYMENT */
 #paymentSection{
-    max-width:600px;
-    margin:auto;
-    padding:15px;
+    margin-top:20px;
+    border-top:1px solid rgba(255,255,255,0.2);
+    padding-top:20px;
 }
 
+#paymentSection h3{
+    color:#1e90ff;
+    margin-bottom:10px;
+}
+
+/* CONSENT */
+.consent-box{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-top:15px;
+}
+
+.consent-box input{
+    width:auto;
+}
+
+/* FOOTER */
 footer{
     text-align:center;
     font-size:10px;
@@ -114,89 +153,228 @@ footer{
     border-top:1px solid rgba(255,255,255,0.2);
     margin-top:20px;
 }
-</style></head><body><header>
+
+.footer-links{
+    text-align:center;
+    margin-top:10px;
+    font-size:10px;
+}
+
+.footer-links a{
+    color:orange;
+    text-decoration:none;
+}
+
+.footer-links a:hover{
+    text-decoration:underline;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
     <div class="logo">
         <img src="gdeh_logo.png" alt="GDEH Logo">
     </div>
-</header><h2>Garissa Digital Empowerment Hub CBO Workshops Application Form</h2>
-<div class="note">Applicant must verify payment before submitting</div><form id="applicationForm"><fieldset>
-<legend>Personal Information</legend><label>First Name</label> <input type="text" required>
+</header>
 
-<label>Last Name</label> <input type="text" required>
+<div class="main-box">
 
-<label>Gender</label> <select required>
+<h2>Garissa Digital Empowerment Hub CBO Workshops Application Form</h2>
 
+<div class="note">
+Applicant must verify payment before submitting
+</div>
+
+<form id="applicationForm">
+
+<fieldset>
+<legend>Personal Information</legend>
+
+<label>First Name <span class="required">*</span></label>
+<input type="text" required>
+
+<label>Last Name <span class="required">*</span></label>
+<input type="text" required>
+
+<label>Gender <span class="required">*</span></label>
+<select required>
 <option value="">Select</option>
 <option>Male</option>
 <option>Female</option>
 <option>Other</option>
-</select><label>Marital Status</label> <select>
+</select>
 
+<label>Marital Status <span class="required">*</span></label>
+<select required>
+<option value="">Select</option>
 <option>Single</option>
 <option>Married</option>
 <option>Divorced</option>
 <option>Other</option>
-</select><label>Date of Birth</label> <input type="date" required>
+</select>
 
-<label>Email Address</label> <input type="email" required>
+<label>Date of Birth <span class="required">*</span></label>
+<input type="date" required>
 
-<label>Address</label> <input type="text">
+<label>Email Address <span class="required">*</span></label>
+<input type="email" required>
 
-<label>Date of Application</label> <input type="date" required>
+<label>Address <span class="required">*</span></label>
+<input type="text" required>
 
-<label>Phone Number</label> <input type="tel" required>
+<label>Date of Application <span class="required">*</span></label>
+<input type="date" required>
 
-<label>Type of National Identity</label> <select required>
+<label>Phone Number <span class="required">*</span></label>
+<input type="tel" required>
 
+<label>Type of National Identity <span class="required">*</span></label>
+<select required>
 <option value="">Select</option>
 <option>Alien</option>
 <option>National ID</option>
 <option>Passport</option>
 <option>Birth Certificate</option>
-</select><label>KRA PIN (Optional)</label> <input type="text">
+</select>
 
-</fieldset><fieldset>
+<label>KRA PIN <span class="required">*</span></label>
+<input type="text" required>
+
+</fieldset>
+
+<fieldset>
 <legend>Emergency Contact 1</legend>
-<label>Full Name</label>
-<input type="text" required>
-<label>Phone Number</label>
-<input type="tel" required>
-<label>Relationship</label>
-<input type="text" required>
-</fieldset><fieldset>
-<legend>Emergency Contact 2</legend>
-<label>Full Name</label>
-<input type="text" required>
-<label>Phone Number</label>
-<input type="tel" required>
-<label>Relationship</label>
-<input type="text" required>
-</fieldset><label>
-<input type="checkbox" required>
-I agree to the terms and conditions.
-</label><button type="submit" id="submitBtn" disabled>Submit Application</button>
 
-</form><div id="paymentSection">
-<h3 style="color:#1e90ff;">Payment Instructions</h3>
+<label>Full Name <span class="required">*</span></label>
+<input type="text" required>
+
+<label>Phone Number <span class="required">*</span></label>
+<input type="tel" required>
+
+<label>Relationship <span class="required">*</span></label>
+<input type="text" required>
+
+</fieldset>
+
+<fieldset>
+<legend>Emergency Contact 2</legend>
+
+<label>Full Name <span class="required">*</span></label>
+<input type="text" required>
+
+<label>Phone Number <span class="required">*</span></label>
+<input type="tel" required>
+
+<label>Relationship <span class="required">*</span></label>
+<input type="text" required>
+
+</fieldset>
+
+<!-- REQUIRED CONSENT -->
+<div class="consent-box">
+    <input type="checkbox" id="consentCheck" required>
+    <label for="consentCheck">
+        I have read and accepted the Privacy Policy and Terms & Conditions <span class="required">*</span>
+    </label>
+</div>
+
+<button type="submit" id="submitBtn" disabled>
+Submit Application
+</button>
+
+</form>
+
+<!-- PAYMENT -->
+<div id="paymentSection">
+
+<h3>Payment Instructions</h3>
+
 <p><strong>Pay Bill:</strong> 403070</p>
 <p><strong>Business Number:</strong> ID / Birth Certificate / Passport</p>
-<p><strong>Amount:</strong> KSh 300</p><label>M-Pesa Confirmation Code</label> <input type="text" id="mpesaCode" placeholder="Enter transaction code">
+<p><strong>Amount:</strong> KSh 300</p>
 
-<button onclick="verifyPayment()">Verify Payment</button>
+<label>M-Pesa Confirmation Code <span class="required">*</span></label>
+<input type="text" id="mpesaCode" placeholder="Enter transaction code" required>
 
-</div><footer>
+<button type="button" onclick="verifyPayment()">
+Verify Payment
+</button>
+
+</div>
+
+</div>
+
+<footer>
 © 2026 Garissa Digital Empowerment Hub CBO | All Rights Reserved
-</footer><script>
-function verifyPayment(){
-    let code=document.getElementById('mpesaCode').value;
-    let btn=document.getElementById('submitBtn');
+</footer>
 
-    if(code.length>5){
+<div class="footer-links">
+    <a href="privacy_policy.html">Privacy Policy</a>
+    |
+    <a href="privacy_terms.html">Terms & Conditions</a>
+</div>
+
+<script>
+
+function verifyPayment(){
+
+    let code = document.getElementById('mpesaCode').value;
+    let btn = document.getElementById('submitBtn');
+
+    if(code.length > 5){
+
         alert('Payment verified successfully');
-        btn.disabled=false;
+
+        btn.disabled = false;
+
     }else{
+
         alert('Enter valid M-Pesa code');
+
     }
 }
-</script></body>
+
+/* FORM SUBMISSION VALIDATION */
+
+document.getElementById("applicationForm")
+.addEventListener("submit", function(e){
+
+    let consent =
+    document.getElementById("consentCheck").checked;
+
+    let submitBtn =
+    document.getElementById("submitBtn").disabled;
+
+    if(!consent){
+
+        e.preventDefault();
+
+        alert(
+        "You must accept the Privacy Policy and Terms & Conditions."
+        );
+
+        return;
+    }
+
+    if(submitBtn){
+
+        e.preventDefault();
+
+        alert(
+        "Please verify payment before submitting."
+        );
+
+        return;
+    }
+
+    alert("Application submitted successfully.");
+
+});
+
+</script>
+
+</body>
 </html>
