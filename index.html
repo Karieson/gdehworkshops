@@ -131,22 +131,13 @@ button:disabled{
 }
 .consent-box input{ width:auto; }
 
+
 /* CAPTCHA */
-.captcha-box{
-  margin-top:15px;
-  font-size:10px;
-  color:#001f3f;
-  display:flex;
-  align-items:center;
-  gap:8px;
-}
-.captcha-box input{ width:auto; }
-.captcha-refresh{
-  font-size:12px;
-  cursor:pointer;
-  color:#001f3f;
-}
-.captcha-refresh:hover{ color:darkorange; }
+#captchaBox{text-align:center;margin-top:20px;}
+#captchaImage{border:1px solid #ddd;border-radius:6px;background:#f9f9f9;box-shadow:0 0 6px rgba(0,31,63,0.1);}
+#captchaInput{padding:6px;margin-top:8px;width:180px;border:1px solid #ddd;border-radius:6px;font-size:9px;}
+#captchaBox a{font-size:9px;color:#001f3f;font-weight:600;text-decoration:none;}
+#captchaBox a:hover{text-decoration:underline;}
 
 /* FOOTER */
 footer {
@@ -222,12 +213,30 @@ footer a:hover {
   <label for="consentCheck">I accept the Privacy Policy and Terms & Conditions <span class="required">*</span></label>
 </div>
 
-<!-- CAPTCHA -->
-<div class="captcha-box">
-  <input type="checkbox" id="captchaCheck" required>
-  <label for="captchaCheck">I am not a robot <span class="required">*</span></label>
-  <span class="captcha-refresh" onclick="refreshCaptcha()">&#x21bb;</span>
-</div>
+
+      <!-- CAPTCHA BOX -->
+      <div id="captchaBox">
+        <img id="captchaImage" alt="CAPTCHA" width="180" height="60"
+             style="border:1px solid #ddd;border-radius:6px;background:#f9f9f9;box-shadow:0 0 6px rgba(0,31,63,0.1);display:block;margin:auto;">
+        <br>
+        <!-- LABEL + REFRESH ICON -->
+<label style="display:flex;align-items:center;gap:6px;justify-content:center;font-size:9px;color:#001f3f;">
+  Enter CAPTCHA
+  <svg onclick="openCaptcha()" xmlns="http://www.w3.org/2000/svg" 
+       width="14" height="14" viewBox="0 0 24 24" fill="none" 
+       stroke="#001f3f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+       style="cursor:pointer;" title="Refresh CAPTCHA">
+    <polyline points="23 4 23 10 17 10"></polyline>
+    <path d="M20.49 15A9 9 0 1 1 23 10"></path>
+  </svg>
+</label>
+        <input type="text" id="captchaInput" placeholder="Enter CAPTCHA"
+               style="padding:6px;margin-top:6px;width:180px;border:1px solid #ddd;border-radius:6px;font-size:9px;">
+        <div style="margin-top:8px;">
+          <a href="#" onclick="verifyCaptcha();return false;"
+             style="font-size:9px;color:#001f3f;font-weight:600;text-decoration:none;">Verify CAPTCHA</a>
+        </div>
+      </div>
 
 <button type="submit" id="submitBtn" disabled>Submit Application</button>
 
@@ -266,13 +275,10 @@ function verifyPayment(){
   }
 }
 
-function refreshCaptcha(){
-  alert("Captcha refreshed!");
-}
 
 document.getElementById("applicationForm").addEventListener("submit", function(e){
   let consent = document.getElementById("consentCheck").checked;
-  let captcha = document.getElementById("captchaCheck").checked;
+  
   let submitBtn = document.getElementById("submitBtn").disabled;
 
   if(!consent){
@@ -280,11 +286,7 @@ document.getElementById("applicationForm").addEventListener("submit", function(e
     alert("You must accept the Privacy Policy and Terms & Conditions.");
     return;
   }
-  if(!captcha){
-    e.preventDefault();
-    alert("Please confirm the captcha box.");
-    return;
-  }
+  
   if(submitBtn){
     e.preventDefault();
     alert("Please verify payment before submitting.");
@@ -293,6 +295,7 @@ document.getElementById("applicationForm").addEventListener("submit", function(e
   alert("Application submitted successfully.");
 });
 </script>
+  <script src="captcha.js"></script>
 
 </body>
 </html>
