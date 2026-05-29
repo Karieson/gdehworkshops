@@ -14,44 +14,44 @@
 }
 
 body{
-  background:#fff;                /* uniform white background */
-  color:#001f3f;                  /* dark navy font */
+  background:#fff;
+  color:#001f3f;
   font-size:11px;
   line-height:1.6;
-  padding:20px;
+
   min-height:100vh;
   display:flex;
   flex-direction:column;
 }
 
+/* CONTENT WRAPPER */
+.page-content{
+  flex:1;
+  padding:20px;
+}
+
 /* HEADER */
 header{
-  position:relative;
+  position:flex;
   padding-bottom:20px;
 }
+
 .logo img{
-  width:120px;
+  width:100px;
 }
+
 .home-link{
   position:absolute;
   top:10px;
   right:20px;
-  color:#000;                     /* black Back to Home link */
+  color:#000;
   text-decoration:none;
   font-size:11px;
   font-weight:600;
 }
+
 .home-link:hover{
   text-decoration:underline;
-}
-
-/* MAIN BOX */
-.main-box{
-  max-width:700px;
-  margin:20px auto;
-  padding:20px;
-  background:#fafafa;
-  border-radius:8px;
 }
 
 /* TITLE */
@@ -62,6 +62,7 @@ h2{
   text-align:center;
   margin-bottom:10px;
 }
+
 .note{
   text-align:center;
   font-size:10px;
@@ -70,29 +71,38 @@ h2{
 }
 
 /* FORM */
-form{ width:100%; }
+form{
+  width:100%;
+  max-width:700px;
+  margin:0 auto;
+}
+
 fieldset{
-  border:none;                    /* removed frame */
+  border:none;
   margin-bottom:15px;
   padding:10px 0;
 }
+
 legend{
   font-size:11px;
   color:#001f3f;
   font-weight:600;
 }
+
 label{
   display:block;
   margin-top:8px;
   margin-bottom:3px;
   font-size:10px;
-  color:#334;                     /* light dark navy */
+  color:#334;
 }
+
 .required{ color:red; }
+
 input, select{
   width:100%;
   padding:6px;
-  font-size:10px;                 /* very small black font */
+  font-size:10px;
   color:#000;
   border:1px solid #ccc;
   border-radius:4px;
@@ -105,17 +115,19 @@ button{
   padding:5px 10px;
   font-size:10px;
   border:none;
-  border-radius:20px;             /* rounded corners */
+  border-radius:20px;
   background:#001f3f;
   color:#fff;
   cursor:pointer;
-  box-shadow:0 0 6px rgba(0,31,63,0.6); /* glowing effect */
+  box-shadow:0 0 6px rgba(0,31,63,0.6);
   transition:0.3s;
 }
+
 button:hover{
   box-shadow:0 0 10px rgba(0,31,63,0.9);
   opacity:0.9;
 }
+
 button:disabled{
   background:gray;
   cursor:not-allowed;
@@ -129,42 +141,53 @@ button:disabled{
   gap:8px;
   margin-top:15px;
 }
+
 .consent-box input{ width:auto; }
 
-
 /* CAPTCHA */
-#captchaBox{text-align:center;margin-top:20px;}
-#captchaImage{border:1px solid #ddd;border-radius:6px;background:#f9f9f9;box-shadow:0 0 6px rgba(0,31,63,0.1);}
-#captchaInput{padding:6px;margin-top:8px;width:180px;border:1px solid #ddd;border-radius:6px;font-size:9px;}
-#captchaBox a{font-size:9px;color:#001f3f;font-weight:600;text-decoration:none;}
-#captchaBox a:hover{text-decoration:underline;}
+#captchaBox{
+  text-align:center;
+  margin-top:20px;
+}
+
+#captchaImage{
+  border:1px solid #ddd;
+  border-radius:6px;
+  background:#f9f9f9;
+  box-shadow:0 0 6px rgba(0,31,63,0.1);
+}
+
+/* PAYMENT */
+#paymentSection{
+  margin-top:20px;
+}
 
 /* FOOTER */
-footer {
-  text-align: center;
-  padding: 18px;
-  border-top: 2px solid #001f3f;   /* dark navy divider */
-  background: #fff;                /* white footer background */
+footer{
+  width:100%;
+  background:#001f3f;
+  border-top:2px solid #001f3f;
+  text-align:center;
+  padding:18px 18px 30px;
 }
 
-footer p {
-  color: #000;                     /* black text if needed */
-  font-size: 11px;
-  font-weight: bold;               /* bold footer text */
-  margin: 4px 0;
+.footer-links{
+  color:#fff;
+  font-size:11px;
+  font-weight:bold;
+  line-height:1.8;
 }
 
-footer a {
-  color: #fff;                     /* white links */
-  font-size: 11px;
-  font-weight: 300;                /* lighter weight for links */
-  text-decoration: none;
-  transition: color 0.3s ease;
+footer a{
+  color:#e0e0e0;
+  text-decoration:none;
+  font-size:11px;
+  font-weight:300;
 }
 
-footer a:hover {
-  text-decoration: underline;
-  color: #e0e0e0;                  /* lighter white/grey hover */
+footer a:hover{
+  color:#fff;
+  text-decoration:underline;
 }
 </style>
 </head>
@@ -178,79 +201,121 @@ footer a:hover {
   <a href="index.html" class="home-link">Back to Home</a>
 </header>
 
-<div class="main-box">
+<div class="page-content">
 
-<h2>Garissa Digital Empowerment Hub CBO Workshops Application Form</h2>
-<div class="note">Applicant must verify payment before submitting</div>
+<h2>Garissa Digital Empowerment Hub CBO Workshops Booking Form</h2>
 
-<form id="applicationForm">
+<div class="note">Applicant Must Give Consent Before Booking</div>
+
+<form id="bookingForm">
 
 <fieldset>
-<legend>Personal Information</legend>
+<legend>Participant Information</legend>
+
 <label>First Name <span class="required">*</span></label>
-<input type="text" required>
+<input type="text" id="firstName" required>
+
 <label>Last Name <span class="required">*</span></label>
-<input type="text" required>
+<input type="text" id="lastName" required>
+
 <label>Email Address <span class="required">*</span></label>
-<input type="email" required>
+<input type="email" id="email" required>
+
 <label>Phone Number <span class="required">*</span></label>
-<input type="tel" required>
+<input type="tel" id="phone" required>
+
 </fieldset>
 
 <fieldset>
-<legend>Emergency Contact</legend>
-<label>Full Name <span class="required">*</span></label>
-<input type="text" required>
-<label>Phone Number <span class="required">*</span></label>
-<input type="tel" required>
-<label>Relationship <span class="required">*</span></label>
-<input type="text" required>
+<legend>Workshop Booking</legend>
+
+<label>Select Course <span class="required">*</span></label>
+<select id="courseSelect" required>
+  <option value="">Choose Course</option>
+  <option value="Computer Packages">Computer Packages</option>
+  <option value="Agro Entrepreneurship">Agro Entrepreneurship</option>
+  <option value="Smartphone Literacy">Smartphone Literacy</option>
+  <option value="ICT Short Courses">ICT Short Courses</option>
+</select>
+
+<label>Select Unit <span class="required">*</span></label>
+<select id="unitSelect" required>
+  <option value="">Choose Unit</option>
+</select>
+
+<label>Preferred Weekend <span class="required">*</span></label>
+<input type="date" id="weekendDate" required>
+
+<label>Number of Seats</label>
+<input type="number" id="seats" min="1" max="30" value="1">
+
 </fieldset>
 
-<!-- CONSENT -->
 <div class="consent-box">
   <input type="checkbox" id="consentCheck" required>
-  <label for="consentCheck">I accept the Privacy Policy and Terms & Conditions <span class="required">*</span></label>
+  <label for="consentCheck">
+    I accept the Privacy Policy and Terms & Conditions *
+  </label>
+</div>
+
+<!-- CAPTCHA -->
+<div id="captchaBox">
+  <img id="captchaImage" alt="CAPTCHA"
+       width="180"
+       height="60"
+       style="border:1px solid #ddd;border-radius:6px;background:#f9f9f9;display:block;margin:auto;">
+</div>
+  <br>
+
+  <label style="display:flex;align-items:center;gap:6px;justify-content:center;font-size:9px;color:#001f3f;">
+    Enter CAPTCHA
+
+    <svg onclick="openCaptcha()"
+         xmlns="http://www.w3.org/2000/svg"
+         width="14"
+         height="14"
+         viewBox="0 0 24 24"
+         fill="none"
+         stroke="#001f3f"
+         stroke-width="2"
+         stroke-linecap="round"
+         stroke-linejoin="round"
+         style="cursor:pointer;"
+         title="Refresh CAPTCHA">
+
+      <polyline points="23 4 23 10 17 10"></polyline>
+      <path d="M20.49 15A9 9 0 1 1 23 10"></path>
+
+    </svg>
+  </label>
+
+  <input type="text"
+         id="captchaInput"
+         placeholder="Enter CAPTCHA"
+         style="padding:6px;margin-top:6px;width:120px;border:1px solid #ddd;border-radius:6px;font-size:9px;">
+
+  <div style="margin-top:8px;">
+    <a href="#"
+       onclick="verifyCaptcha();return false;"
+       style="font-size:9px;color:#001f3f;font-weight:600;text-decoration:none;">
+       Verify CAPTCHA
+    </a>
+  </div>
 </div>
 
 
-      <!-- CAPTCHA BOX -->
-      <div id="captchaBox">
-        <img id="captchaImage" alt="CAPTCHA" width="180" height="60"
-             style="border:1px solid #ddd;border-radius:6px;background:#f9f9f9;box-shadow:0 0 6px rgba(0,31,63,0.1);display:block;margin:auto;">
-        <br>
-        <!-- LABEL + REFRESH ICON -->
-<label style="display:flex;align-items:center;gap:6px;justify-content:center;font-size:9px;color:#001f3f;">
-  Enter CAPTCHA
-  <svg onclick="openCaptcha()" xmlns="http://www.w3.org/2000/svg" 
-       width="14" height="14" viewBox="0 0 24 24" fill="none" 
-       stroke="#001f3f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-       style="cursor:pointer;" title="Refresh CAPTCHA">
-    <polyline points="23 4 23 10 17 10"></polyline>
-    <path d="M20.49 15A9 9 0 1 1 23 10"></path>
-  </svg>
-</label>
-        <input type="text" id="captchaInput" placeholder="Enter CAPTCHA"
-               style="padding:6px;margin-top:6px;width:180px;border:1px solid #ddd;border-radius:6px;font-size:9px;">
-        <div style="margin-top:8px;">
-          <a href="#" onclick="verifyCaptcha();return false;"
-             style="font-size:9px;color:#001f3f;font-weight:600;text-decoration:none;">Verify CAPTCHA</a>
-        </div>
-      </div>
+<div id="paymentSection">
+  <h3 style="font-size:12px;">Workshop Payment</h3>
+  <p><strong>Workshop Fee:</strong> KSh 1000</p>
 
-<button type="submit" id="submitBtn" disabled>Submit Application</button>
+  <button type="button" id="pesapalBtn">Pay with Pesapal</button>
+</div>
+
+<button type="submit" id="submitBtn" disabled>
+Complete Booking
+</button>
 
 </form>
-
-<!-- PAYMENT -->
-<div id="paymentSection">
-<h3 style="font-size:12px; color:#001f3f;">Payment Instructions</h3>
-<p><strong>Pay Bill:</strong> 403070</p>
-<p><strong>Amount:</strong> KSh 300</p>
-<label>M-Pesa Confirmation Code <span class="required">*</span></label>
-<input type="text" id="mpesaCode" placeholder="Enter transaction code" required>
-<button type="button" onclick="verifyPayment()">Verify Payment</button>
-</div>
 
 </div>
 
@@ -264,38 +329,155 @@ footer a:hover {
 </footer>
 
 <script>
-function verifyPayment(){
-  let code = document.getElementById('mpesaCode').value;
-  let btn = document.getElementById('submitBtn');
-  if(code.length > 5){
-    alert('Payment verified successfully');
-    btn.disabled = false;
-  }else{
-    alert('Enter valid M-Pesa code');
+
+const units = {
+
+  "Computer Packages": [
+    "CP101 - Introduction to Computers",
+    "CP102 - Microsoft Word",
+    "CP103 - Microsoft Excel",
+    "CP104 - Microsoft PowerPoint",
+    "CP105 - Internet & Email Applications",
+    "CP106 - Computer Operating Systems",
+    "CP107 - Data Entry & Typing Skills",
+    "CP108 - Computer Maintenance Basics"
+  ],
+
+  "Agro Entrepreneurship": [
+    "AE101 - Introduction to Agriculture",
+    "AE102 - Agribusiness Management",
+    "AE103 - Farm Record Keeping",
+    "AE104 - Crop Production Techniques",
+    "AE105 - Livestock Management",
+    "AE106 - Agricultural Marketing",
+    "AE107 - Financial Management for Farmers",
+    "AE108 - Sustainable Farming Practices"
+  ],
+
+  "Smartphone Literacy": [
+    "SL101 - Introduction to Smartphones",
+    "SL102 - Android Phone Basics",
+    "SL103 - Internet Browsing & Google Services",
+    "SL104 - Social Media Applications",
+    "SL105 - Mobile Money & Digital Payments",
+    "SL106 - Smartphone Security & Privacy",
+    "SL107 - Photography & Video Basics",
+    "SL108 - Online Communication Skills"
+  ],
+
+  "ICT Short Courses": [
+    "ICT101 - Introduction to ICT",
+    "ICT102 - Networking Fundamentals",
+    "ICT103 - Web Design Basics",
+    "ICT104 - Graphic Design Essentials",
+    "ICT105 - Database Management",
+    "ICT106 - Cybersecurity Basics",
+    "ICT107 - Programming Fundamentals",
+    "ICT108 - Digital Marketing"
+  ]
+};
+
+const courseSelect = document.getElementById("courseSelect");
+const unitSelect = document.getElementById("unitSelect");
+
+courseSelect.addEventListener("change", function () {
+
+  const selectedCourse = this.value;
+
+  unitSelect.innerHTML =
+    '<option value="">Choose Unit</option>';
+
+  if(units[selectedCourse]) {
+
+    units[selectedCourse].forEach(unit => {
+
+      const option = document.createElement("option");
+
+      option.value = unit;
+      option.textContent = unit;
+
+      unitSelect.appendChild(option);
+
+    });
+
   }
-}
+
+});
+
+/* PESAPAL PAYMENT */
+
+let paymentVerified = false;
+
+document.getElementById("pesapalBtn")
+.addEventListener("click", function(){
+
+  alert("Redirecting to Pesapal Payment Gateway...");
+
+  /*
+    Replace with your actual Pesapal payment link
+  */
+
+  window.open(
+    "https://pay.pesapal.com/",
+    "_blank"
+  );
+
+  /*
+    TEMPORARY SUCCESS
+    Replace with actual callback verification
+  */
+
+  setTimeout(() => {
+
+    paymentVerified = true;
+
+    document.getElementById("submitBtn")
+      .disabled = false;
+
+    alert("Payment verified successfully");
+
+  }, 3000);
+
+});
 
 
-document.getElementById("applicationForm").addEventListener("submit", function(e){
-  let consent = document.getElementById("consentCheck").checked;
-  
-  let submitBtn = document.getElementById("submitBtn").disabled;
+/* FORM SUBMISSION */
+
+document.getElementById("bookingForm")
+.addEventListener("submit", function(e){
+
+  e.preventDefault();
+
+  let consent =
+    document.getElementById("consentCheck").checked;
 
   if(!consent){
-    e.preventDefault();
-    alert("You must accept the Privacy Policy and Terms & Conditions.");
+
+    alert(
+      "You must accept the Privacy Policy and Terms & Conditions."
+    );
+
     return;
   }
-  
-  if(submitBtn){
-    e.preventDefault();
-    alert("Please verify payment before submitting.");
+
+  if(!paymentVerified){
+
+    alert("Please complete payment first.");
+
     return;
   }
-  alert("Application submitted successfully.");
+
+  alert("Workshop booking submitted successfully.");
+
+  /*
+    CONNECT TO GOOGLE SHEETS HERE
+  */
+
 });
+
 </script>
-  <script src="captcha.js"></script>
+
+<script src="captcha.js"></script>
 
 </body>
 </html>
