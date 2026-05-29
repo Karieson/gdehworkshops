@@ -108,30 +108,33 @@ input, select{
   border-radius:4px;
 }
 
+
 /* BUTTONS */
-button{
-  display:block;
-  margin:12px auto;
-  padding:5px 10px;
-  font-size:10px;
-  border:none;
-  border-radius:20px;
-  background:#001f3f;
-  color:#fff;
-  cursor:pointer;
-  box-shadow:0 0 6px rgba(0,31,63,0.6);
-  transition:0.3s;
+button {
+  display: block;
+  margin: 12px auto;
+  padding: 5px 10px;
+  font-size: 10px;
+  border: none;
+  border-radius: 20px;
+  background: #001f3f; /* dark navy */
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0, 31, 63, 0.6);
+  transition: 0.3s;
 }
 
-button:hover{
-  box-shadow:0 0 10px rgba(0,31,63,0.9);
-  opacity:0.9;
+/* hover glow */
+button:hover {
+  box-shadow: 0 0 10px rgba(0, 31, 63, 0.9);
+  opacity: 0.9;
 }
 
-button:disabled{
-  background:gray;
-  cursor:not-allowed;
-  box-shadow:none;
+/* disabled state */
+button:disabled {
+  background: gray;
+  cursor: not-allowed;
+  box-shadow: none;
 }
 
 /* CONSENT */
@@ -156,12 +159,55 @@ button:disabled{
   background:#f9f9f9;
   box-shadow:0 0 6px rgba(0,31,63,0.1);
 }
-
-/* PAYMENT */
-#paymentSection{
-  margin-top:20px;
+#paymentSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 25px;
 }
 
+#paymentSection h3 {
+  font-size: 15px;
+  margin-bottom: 8px;
+}
+
+#paymentSection p {
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.payment-note {
+  font-size: 10px;
+  color: #666;
+  margin-bottom: 12px;
+}
+
+/* BUTTON STYLE */
+#pesapalBtn {
+  background: #0b1f3a; /* dark navy */
+  color: #ffffff;
+  font-size: 12px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 20px; /* small rounded corners */
+  cursor: pointer;
+
+  box-shadow: 0 0 8px rgba(11, 31, 58, 0.6);
+  transition: all 0.25s ease-in-out;
+}
+
+/* hover glow effect */
+#pesapalBtn:hover {
+  box-shadow: 0 0 14px rgba(0, 140, 255, 0.8);
+  transform: translateY(-1px);
+}
+
+/* click effect */
+#pesapalBtn:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 6px rgba(0, 140, 255, 0.5);
+}
 /* FOOTER */
 footer{
   width:100%;
@@ -305,10 +351,15 @@ footer a:hover{
 
 
 <div id="paymentSection">
-  <h3 style="font-size:12px;">Workshop Payment</h3>
+  <h3>Workshop Payment</h3>
+
   <p><strong>Workshop Fee:</strong> KSh 1000</p>
 
-  <button type="button" id="pesapalBtn">Pay with Pesapal</button>
+  <small class="payment-note">Secure payment via Pesapal</small>
+
+  <button id="pesapalBtn" type="button">
+    Pay with Pesapal
+  </button>
 </div>
 
 <button type="submit" id="submitBtn" disabled>
@@ -404,42 +455,9 @@ courseSelect.addEventListener("change", function () {
 
 });
 
-/* PESAPAL PAYMENT */
-
-let paymentVerified = false;
-
-document.getElementById("pesapalBtn")
-.addEventListener("click", function(){
-
-  alert("Redirecting to Pesapal Payment Gateway...");
-
-  /*
-    Replace with your actual Pesapal payment link
-  */
-
-  window.open(
-    "https://pay.pesapal.com/",
-    "_blank"
-  );
-
-  /*
-    TEMPORARY SUCCESS
-    Replace with actual callback verification
-  */
-
-  setTimeout(() => {
-
-    paymentVerified = true;
-
-    document.getElementById("submitBtn")
-      .disabled = false;
-
-    alert("Payment verified successfully");
-
-  }, 3000);
-
+document.getElementById("pesapalBtn").addEventListener("click", function () {
+  window.location.href = "https://www.pesapal.com/";
 });
-
 
 /* FORM SUBMISSION */
 
