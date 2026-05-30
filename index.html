@@ -532,66 +532,141 @@ document.addEventListener(
             }let captchaPassed = false;
 
 document
-.getElementById("checkCaptchaBtn")
-.addEventListener("click", async () => {
+<script>
 
-    const answer =
-    document.getElementById(
-      "captchaAnswer"
-    ).value;
+const API = "https://math-captcha-backend.onrender.com";
 
-    const result =
-    document.getElementById(
-      "captchaResult"
-    );
+let captchaPassed = false;
 
+// Load CAPTCHA
+async function loadCaptcha() {
     try {
 
-        const response =
-        await fetch(
-          `${API}/verify`,
-          {
-            method: "POST",
-
-            credentials: "include",
-
-            headers: {
-              "Content-Type":
-              "application/json"
-            },
-
-            body: JSON.stringify({
-              answer
-            })
-          }
+        const response = await fetch(
+            `${API}/captcha`,
+            {
+                credentials: "include"
+            }
         );
 
-        const data =
-        await response.json();
+        const data = await response.json();
 
-        if (data.success) {
-
-            captchaPassed = true;
-
-            result.innerHTML =
-            "✅ Correct Answer";
-
-        } else {
-
-            captchaPassed = false;
-
-            result.innerHTML =
-            "❌ Wrong Answer";
-
-            loadCaptcha();
-        }
+        document.getElementById(
+            "captchaQuestion"
+        ).innerText = data.question;
 
     } catch (error) {
 
-        result.innerHTML =
-        "⚠️ Verification Failed";
+        console.error(
+            "CAPTCHA Load Error:",
+            error
+        );
+
+        document.getElementById(
+            "captchaQuestion"
+        ).innerText = "Failed to load CAPTCHA";
     }
-});
+}
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+        const form =
+        document.getElementById(
+            "bookingForm"
+        );
+
+        if (!form) return;
+
+        loadCaptcha();
+
+        // Check CAPTCHA button
+        document
+        .getElementById("checkCaptchaBtn")
+        .addEventListener(
+            "click",
+            async () => {
+
+                const answer =
+                document.getElementById(
+                    "captchaAnswer"
+                ).value;
+
+                const result =
+                document.getElementById(
+                    "captchaResult"
+                );
+
+                try {
+
+                    const response =
+                    await fetch(
+                        `${API}/verify`,
+                        {
+                            method: "POST",
+
+                            credentials: "include",
+
+                            headers: {
+                                "Content-Type":
+                                "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                answer
+                            })
+                        }
+                    );
+
+                    const data =
+                    await response.json();
+
+                    if (data.success) {
+
+                        captchaPassed = true;
+
+                        result.innerHTML =
+                        "✅ Correct Answer";
+
+                    } else {
+
+                        captchaPassed = false;
+
+                        result.innerHTML =
+                        "❌ Wrong Answer";
+
+                        loadCaptcha();
+                    }
+
+                } catch (error) {
+
+                    result.innerHTML =
+                    "⚠️ Verification Failed";
+                }
+            }
+        );
+
+        // Form Submit
+        form.addEventListener(
+            "submit",
+            function (e) {
+
+                if (!captchaPassed) {
+
+                    e.preventDefault();
+
+                    alert(
+                        "Please verify the CAPTCHA first."
+                    );
+
+                    return;
+                }
+            }
+        );
+    }
+);
+
 
 </script>
 
