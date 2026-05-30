@@ -294,13 +294,7 @@ footer a:hover{
 </div>
 
 
-
-      <!-- CAPTCHA BOX (Google reCAPTCHA) -->
-<div id="captchaBox" style="display:flex;flex-direction:column;align-items:center;gap:8px;">
-  <div class="g-recaptcha"
-       data-sitekey="6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV">
-  </div>
-</div>
+<input type="hidden" id="recaptchaTokenBooking" name="recaptchaToken">
 <div id="paymentSection">
   <h3>Workshop Payment</h3>
 
@@ -329,6 +323,49 @@ Complete Booking
     <a href="privacy_terms.html">Terms & Conditions</a>
   </div>
 </footer>
+
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV"></script>
+
+<script>
+function executeRecaptcha(callback) {
+    grecaptcha.ready(() => {
+        grecaptcha.execute('6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV', {
+            action: 'booking_submit'
+        }).then(token => {
+            callback(token);
+        });
+    });
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+
+    const form = document.getElementById("bookingForm");
+
+    if (!form) return;
+
+    form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        executeRecaptcha((token) => {
+
+            let input = document.getElementById("recaptchaTokenBooking");
+
+            if (!input) {
+                input = document.createElement("input");
+                input.type = "hidden";
+                input.name = "recaptchaToken";
+                input.id = "recaptchaTokenBooking";
+                form.appendChild(input);
+            }
+
+            input.value = token;
+
+            form.submit();
+        });
+    });
+
+});
+</script>
 
 <script>
 
@@ -445,47 +482,6 @@ document.getElementById("bookingForm")
 });
 
 </script>
-<script>
-document.querySelector("form").addEventListener("submit", async function (e) {
-  e.preventDefault();
-
-  // 1. Get CAPTCHA token
-  const token = grecaptcha.getResponse();
-
-  if (!token) {
-    alert("Please complete the CAPTCHA");
-    return;
-  }
-
-  // 2. Collect form data
-  const formData = new FormData(this);
-
-  // 3. Add token to request
-  formData.append("token", token);
-
-  try {
-    const res = await fetch("https://captchabackend.onrender./submit", {
-      method: "POST",
-      body: formData
-    });
-
-    const data = await res.json();
-
-    if (data.success) {
-      alert("Form submitted successfully");
-      this.reset();
-      grecaptcha.reset(); // reset captcha
-    } else {
-      alert("CAPTCHA verification failed");
-    }
-
-  } catch (err) {
-    console.error(err);
-    alert("Server error");
-  }
-});
-</script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
 </body>
 </html>
