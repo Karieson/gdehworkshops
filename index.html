@@ -352,8 +352,26 @@ footer a:hover{
     type="number"
     id="captchaAnswer"
     placeholder="Enter answer"
-    required
   >
+
+  <button
+    type="button"
+    id="checkCaptchaBtn"
+    class="submit-btn"
+    style="margin-top:10px;"
+  >
+    Check CAPTCHA
+  </button>
+
+  <div
+    id="captchaResult"
+    style="
+      margin-top:10px;
+      font-size:10px;
+      font-weight:bold;
+      text-align:center;
+    "
+  ></div>
 
 </div>
 <div id="paymentSection">
@@ -375,6 +393,7 @@ Complete Booking
 </form>
 
 </div>
+  
 
 <footer>
   <div class="footer-links">
@@ -385,7 +404,7 @@ Complete Booking
   </div>
 </footer>
 
-  <script src="https://www.google.com/recaptcha/api.js?render=6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV"></script>
+  
 <script>
 
 // =========================
@@ -510,10 +529,69 @@ document.addEventListener(
                         "Something went wrong."
                     );
                 }
-            }
+            }let captchaPassed = false;
+
+document
+.getElementById("checkCaptchaBtn")
+.addEventListener("click", async () => {
+
+    const answer =
+    document.getElementById(
+      "captchaAnswer"
+    ).value;
+
+    const result =
+    document.getElementById(
+      "captchaResult"
+    );
+
+    try {
+
+        const response =
+        await fetch(
+          `${API}/verify`,
+          {
+            method: "POST",
+
+            credentials: "include",
+
+            headers: {
+              "Content-Type":
+              "application/json"
+            },
+
+            body: JSON.stringify({
+              answer
+            })
+          }
         );
+
+        const data =
+        await response.json();
+
+        if (data.success) {
+
+            captchaPassed = true;
+
+            result.innerHTML =
+            "✅ Correct Answer";
+
+        } else {
+
+            captchaPassed = false;
+
+            result.innerHTML =
+            "❌ Wrong Answer";
+
+            loadCaptcha();
+        }
+
+    } catch (error) {
+
+        result.innerHTML =
+        "⚠️ Verification Failed";
     }
-);
+});
 
 </script>
 
