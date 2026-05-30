@@ -327,45 +327,82 @@ Complete Booking
   <script src="https://www.google.com/recaptcha/api.js?render=6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV"></script>
 
 <script>
-function executeRecaptcha(callback) {
-    grecaptcha.ready(() => {
-        grecaptcha.execute('6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV', {
-            action: 'booking_submit'
-        }).then(token => {
-            callback(token);
-        });
-    });
-}
-
+// =========================
+// BOOKING FORM HANDLER
+// =========================
 document.addEventListener("DOMContentLoaded", function () {
 
     const form = document.getElementById("bookingForm");
 
     if (!form) return;
 
-    form.addEventListener("submit", function (e) {
+    form.addEventListener("submit", async function (e) {
+
         e.preventDefault();
 
-        executeRecaptcha((token) => {
+        try {
 
-            let input = document.getElementById("recaptchaTokenBooking");
+            grecaptcha.ready(async () => {
 
-            if (!input) {
-                input = document.createElement("input");
-                input.type = "hidden";
-                input.name = "recaptchaToken";
-                input.id = "recaptchaTokenBooking";
-                form.appendChild(input);
-            }
+                // Generate reCAPTCHA token
+                const token = await grecaptcha.execute(
+                    '6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV',
+                    { action: 'booking_submit' }
+                );
 
-            input.value = token;
+                // Send token to backend verification route
+                const verifyResponse = await fetch("/verify", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ token })
+                });
 
-            form.submit();
-        });
+                const verifyData = await verifyResponse.json();
+
+                // Verification successful
+                if (verifyData.success) {
+
+                    let input = document.getElementById("recaptchaTokenBooking");
+
+                    // Create hidden input if missing
+                    if (!input) {
+
+                        input = document.createElement("input");
+                        input.type = "hidden";
+                        input.name = "recaptchaToken";
+                        input.id = "recaptchaTokenBooking";
+
+                        form.appendChild(input);
+                    }
+
+                    // Store token
+                    input.value = token;
+
+                    // Submit form
+                    form.submit();
+
+                } else {
+
+                    alert("reCAPTCHA verification failed. Please try again.");
+
+                }
+
+            });
+
+        } catch (error) {
+
+            console.error("reCAPTCHA Error:", error);
+            alert("Something went wrong. Please try again.");
+
+        }
+
     });
 
 });
 </script>
+
 
 <script>
 
