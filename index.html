@@ -352,26 +352,8 @@ footer a:hover{
     type="number"
     id="captchaAnswer"
     placeholder="Enter answer"
+    required
   >
-
-  <button
-    type="button"
-    id="checkCaptchaBtn"
-    class="submit-btn"
-    style="margin-top:10px;"
-  >
-    Check CAPTCHA
-  </button>
-
-  <div
-    id="captchaResult"
-    style="
-      margin-top:10px;
-      font-size:10px;
-      font-weight:bold;
-      text-align:center;
-    "
-  ></div>
 
 </div>
 <div id="paymentSection">
@@ -405,6 +387,8 @@ Complete Booking
 </footer>
 
   
+                        
+        
 <script>
 
 // =========================
@@ -529,145 +513,12 @@ document.addEventListener(
                         "Something went wrong."
                     );
                 }
-            }let captchaPassed = false;
-
-document
-<script>
-
-const API = "https://math-captcha-backend.onrender.com";
-
-let captchaPassed = false;
-
-// Load CAPTCHA
-async function loadCaptcha() {
-    try {
-
-        const response = await fetch(
-            `${API}/captcha`,
-            {
-                credentials: "include"
-            }
-        );
-
-        const data = await response.json();
-
-        document.getElementById(
-            "captchaQuestion"
-        ).innerText = data.question;
-
-    } catch (error) {
-
-        console.error(
-            "CAPTCHA Load Error:",
-            error
-        );
-
-        document.getElementById(
-            "captchaQuestion"
-        ).innerText = "Failed to load CAPTCHA";
-    }
-}
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
-
-        const form =
-        document.getElementById(
-            "bookingForm"
-        );
-
-        if (!form) return;
-
-        loadCaptcha();
-
-        // Check CAPTCHA button
-        document
-        .getElementById("checkCaptchaBtn")
-        .addEventListener(
-            "click",
-            async () => {
-
-                const answer =
-                document.getElementById(
-                    "captchaAnswer"
-                ).value;
-
-                const result =
-                document.getElementById(
-                    "captchaResult"
-                );
-
-                try {
-
-                    const response =
-                    await fetch(
-                        `${API}/verify`,
-                        {
-                            method: "POST",
-
-                            credentials: "include",
-
-                            headers: {
-                                "Content-Type":
-                                "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                answer
-                            })
-                        }
-                    );
-
-                    const data =
-                    await response.json();
-
-                    if (data.success) {
-
-                        captchaPassed = true;
-
-                        result.innerHTML =
-                        "✅ Correct Answer";
-
-                    } else {
-
-                        captchaPassed = false;
-
-                        result.innerHTML =
-                        "❌ Wrong Answer";
-
-                        loadCaptcha();
-                    }
-
-                } catch (error) {
-
-                    result.innerHTML =
-                    "⚠️ Verification Failed";
-                }
-            }
-        );
-
-        // Form Submit
-        form.addEventListener(
-            "submit",
-            function (e) {
-
-                if (!captchaPassed) {
-
-                    e.preventDefault();
-
-                    alert(
-                        "Please verify the CAPTCHA first."
-                    );
-
-                    return;
-                }
             }
         );
     }
 );
 
-
+</script>
 </script>
 
 <script>
