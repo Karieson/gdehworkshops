@@ -147,7 +147,48 @@ button:disabled {
 
 .consent-box input{ width:auto; }
 
+/* ===== CAPTCHA ===== */
 
+.captcha-box{
+  margin-top:15px;
+}
+
+.captcha-box label{
+  display:block;
+  margin-top:8px;
+  margin-bottom:3px;
+  font-size:10px;
+  color:#334;
+}
+
+#captchaQuestion{
+  width:100%;
+  padding:8px;
+  border:1px solid #ddd;
+  border-radius:6px;
+  font-size:11px;
+  font-weight:600;
+  color:#001f3f;
+  background:#f8f9fb;
+  text-align:center;
+  margin-bottom:10px;
+  box-shadow:0 0 6px rgba(0,31,63,0.08);
+}
+
+#captchaAnswer{
+  width:100%;
+  padding:6px;
+  font-size:10px;
+  color:#000;
+  border:1px solid #ccc;
+  border-radius:4px;
+}
+
+#captchaAnswer:focus{
+  outline:none;
+  border:1px solid #001f3f;
+  box-shadow:0 0 6px rgba(0,31,63,0.2);
+  }
 #paymentSection {
   display: flex;
   flex-direction: column;
@@ -294,7 +335,27 @@ footer a:hover{
 </div>
 
 
-<input type="hidden" id="recaptchaTokenBooking" name="recaptchaToken">
+<!-- ===== MATH CAPTCHA ===== -->
+
+<div class="captcha-box">
+
+  <label for="captchaAnswer">
+    Solve this math
+    <span class="required">*</span>
+  </label>
+
+  <div id="captchaQuestion">
+    Loading...
+  </div>
+
+  <input
+    type="number"
+    id="captchaAnswer"
+    placeholder="Enter answer"
+    required
+  >
+
+</div>
 <div id="paymentSection">
   <h3>Workshop Payment</h3>
 
@@ -325,84 +386,136 @@ Complete Booking
 </footer>
 
   <script src="https://www.google.com/recaptcha/api.js?render=6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV"></script>
-
 <script>
+
+// =========================
+// CAPTCHA API
+// =========================
+
+const API =
+"https://math-captcha-backend.onrender.com";
+
+// =========================
+// LOAD CAPTCHA
+// =========================
+
+async function loadCaptcha() {
+
+    try {
+
+        const response =
+        await fetch(`${API}/captcha`, {
+
+            credentials: "include"
+        });
+
+        const data =
+        await response.json();
+
+        document.getElementById(
+            "captchaQuestion"
+        ).innerText = data.question;
+
+    } catch (error) {
+
+        console.error(
+            "CAPTCHA Load Error:",
+            error
+        );
+    }
+}
+
 // =========================
 // BOOKING FORM HANDLER
 // =========================
-document.addEventListener("DOMContentLoaded", function () {
 
-    const form = document.getElementById("bookingForm");
+document.addEventListener(
+    "DOMContentLoaded",
 
-    if (!form) return;
+    function () {
 
-    form.addEventListener("submit", async function (e) {
+        const form =
+        document.getElementById(
+            "bookingForm"
+        );
 
-        e.preventDefault();
+        if (!form) return;
 
-        try {
+        // Load CAPTCHA
+        loadCaptcha();
 
-            grecaptcha.ready(async () => {
+        form.addEventListener(
+            "submit",
 
-                // Generate reCAPTCHA token
-                const token = await grecaptcha.execute(
-                    '6Lc3QgMtAAAAADBcEcDv3v17krGHX-qjBiP0o6gV',
-                    { action: 'booking_submit' }
-                );
+            async function (e) {
 
-                // Send token to backend verification route
-                const verifyResponse = await fetch("/verify", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({ token })
-                });
+                e.preventDefault();
 
-                const verifyData = await verifyResponse.json();
+                try {
 
-                // Verification successful
-                if (verifyData.success) {
+                    const answer =
+                    document.getElementById(
+                        "captchaAnswer"
+                    ).value;
 
-                    let input = document.getElementById("recaptchaTokenBooking");
+                    // Verify answer
+                    const verifyResponse =
+                    await fetch(
+                        `${API}/verify`,
+                        {
 
-                    // Create hidden input if missing
-                    if (!input) {
+                            method: "POST",
 
-                        input = document.createElement("input");
-                        input.type = "hidden";
-                        input.name = "recaptchaToken";
-                        input.id = "recaptchaTokenBooking";
+                            credentials: "include",
 
-                        form.appendChild(input);
+                            headers: {
+                                "Content-Type":
+                                "application/json"
+                            },
+
+                            body: JSON.stringify({
+                                answer
+                            })
+                        }
+                    );
+
+                    const verifyData =
+                    await verifyResponse.json();
+
+                    // CAPTCHA Passed
+                    if (
+                        verifyData.success
+                    ) {
+
+                        form.submit();
+
+                    } else {
+
+                        alert(
+                            "Wrong CAPTCHA Answer"
+                        );
+
+                        // Reload CAPTCHA
+                        loadCaptcha();
                     }
 
-                    // Store token
-                    input.value = token;
+                } catch (error) {
 
-                    // Submit form
-                    form.submit();
+                    console.error(
+                        "CAPTCHA Error:",
+                        error
+                    );
 
-                } else {
-
-                    alert("reCAPTCHA verification failed. Please try again.");
-
+                    alert(
+                        "Something went wrong."
+                    );
                 }
+            }
+        );
+    }
+);
 
-            });
-
-        } catch (error) {
-
-            console.error("reCAPTCHA Error:", error);
-            alert("Something went wrong. Please try again.");
-
-        }
-
-    });
-
-});
 </script>
-
 
 <script>
 
