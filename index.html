@@ -388,184 +388,94 @@ Complete Booking
 
   
                         
-        
-<script>
+<script type="module">
+
+// =========================
+// FIREBASE SETUP
+// =========================
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  serverTimestamp
+} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBSjwYT-zi33Pu1m-fQIqS3RVWQOzqbtw",
+  authDomain: "gdehworkshops.firebaseapp.com",
+  projectId: "gdehworkshops",
+  storageBucket: "gdehworkshops.firebasestorage.app",
+  messagingSenderId: "296415841441",
+  appId: "1:296415841441:web:5c3f8447a311876b07f4e0",
+  measurementId: "G-CKH6CVNXRP"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 // =========================
 // CAPTCHA API
 // =========================
-
-const API =
-"https://math-captcha-backend.onrender.com";
-
-// =========================
-// LOAD CAPTCHA
-// =========================
+const API = "https://math-captcha-backend.onrender.com";
 
 async function loadCaptcha() {
-
-    try {
-
-        const response =
-        await fetch(`${API}/captcha`, {
-
-            credentials: "include"
-        });
-
-        const data =
-        await response.json();
-
-        document.getElementById(
-            "captchaQuestion"
-        ).innerText = data.question;
-
-    } catch (error) {
-
-        console.error(
-            "CAPTCHA Load Error:",
-            error
-        );
-    }
+  try {
+    const res = await fetch(`${API}/captcha`, {
+      credentials: "include"
+    });
+    const data = await res.json();
+    document.getElementById("captchaQuestion").innerText = data.question;
+  } catch (err) {
+    console.error(err);
+  }
 }
 
 // =========================
-// BOOKING FORM HANDLER
+// COURSE → UNITS
 // =========================
-
-document.addEventListener(
-    "DOMContentLoaded",
-
-    function () {
-
-        const form =
-        document.getElementById(
-            "bookingForm"
-        );
-
-        if (!form) return;
-
-        // Load CAPTCHA
-        loadCaptcha();
-
-        form.addEventListener(
-            "submit",
-
-            async function (e) {
-
-                e.preventDefault();
-
-                try {
-
-                    const answer =
-                    document.getElementById(
-                        "captchaAnswer"
-                    ).value;
-
-                    // Verify answer
-                    const verifyResponse =
-                    await fetch(
-                        `${API}/verify`,
-                        {
-
-                            method: "POST",
-
-                            credentials: "include",
-
-                            headers: {
-                                "Content-Type":
-                                "application/json"
-                            },
-
-                            body: JSON.stringify({
-                                answer
-                            })
-                        }
-                    );
-
-                    const verifyData =
-                    await verifyResponse.json();
-
-                    // CAPTCHA Passed
-                    if (
-                        verifyData.success
-                    ) {
-
-                        form.submit();
-
-                    } else {
-
-                        alert(
-                            "Wrong CAPTCHA Answer"
-                        );
-
-                        // Reload CAPTCHA
-                        loadCaptcha();
-                    }
-
-                } catch (error) {
-
-                    console.error(
-                        "CAPTCHA Error:",
-                        error
-                    );
-
-                    alert(
-                        "Something went wrong."
-                    );
-                }
-            }
-        );
-    }
-);
-
-</script>
-</script>
-
-<script>
-
 const units = {
-
   "Computer Packages": [
     "CP101 - Introduction to Computers",
     "CP102 - Microsoft Word",
     "CP103 - Microsoft Excel",
     "CP104 - Microsoft PowerPoint",
     "CP105 - Internet & Email Applications",
-    "CP106 - Computer Operating Systems",
-    "CP107 - Data Entry & Typing Skills",
-    "CP108 - Computer Maintenance Basics"
+    "CP106 - Operating Systems",
+    "CP107 - Data Entry Skills",
+    "CP108 - Computer Maintenance"
   ],
 
   "Agro Entrepreneurship": [
-    "AE101 - Introduction to Agriculture",
-    "AE102 - Agribusiness Management",
-    "AE103 - Farm Record Keeping",
-    "AE104 - Crop Production Techniques",
+    "AE101 - Agriculture Basics",
+    "AE102 - Agribusiness",
+    "AE103 - Farm Records",
+    "AE104 - Crop Production",
     "AE105 - Livestock Management",
-    "AE106 - Agricultural Marketing",
-    "AE107 - Financial Management for Farmers",
-    "AE108 - Sustainable Farming Practices"
+    "AE106 - Marketing",
+    "AE107 - Finance",
+    "AE108 - Sustainable Farming"
   ],
 
   "Smartphone Literacy": [
-    "SL101 - Introduction to Smartphones",
-    "SL102 - Android Phone Basics",
-    "SL103 - Internet Browsing & Google Services",
-    "SL104 - Social Media Applications",
-    "SL105 - Mobile Money & Digital Payments",
-    "SL106 - Smartphone Security & Privacy",
-    "SL107 - Photography & Video Basics",
-    "SL108 - Online Communication Skills"
+    "SL101 - Smartphone Basics",
+    "SL102 - Android Use",
+    "SL103 - Internet Use",
+    "SL104 - Social Media",
+    "SL105 - Mobile Money",
+    "SL106 - Security",
+    "SL107 - Photography",
+    "SL108 - Communication"
   ],
 
   "ICT Short Courses": [
-    "ICT101 - Introduction to ICT",
-    "ICT102 - Networking Fundamentals",
-    "ICT103 - Web Design Basics",
-    "ICT104 - Graphic Design Essentials",
-    "ICT105 - Database Management",
-    "ICT106 - Cybersecurity Basics",
-    "ICT107 - Programming Fundamentals",
+    "ICT101 - ICT Intro",
+    "ICT102 - Networking",
+    "ICT103 - Web Design",
+    "ICT104 - Graphic Design",
+    "ICT105 - Databases",
+    "ICT106 - Cybersecurity",
+    "ICT107 - Programming",
     "ICT108 - Digital Marketing"
   ]
 };
@@ -575,67 +485,94 @@ const unitSelect = document.getElementById("unitSelect");
 
 courseSelect.addEventListener("change", function () {
 
-  const selectedCourse = this.value;
+  unitSelect.innerHTML = '<option value="">Choose Unit</option>';
 
-  unitSelect.innerHTML =
-    '<option value="">Choose Unit</option>';
-
-  if(units[selectedCourse]) {
-
-    units[selectedCourse].forEach(unit => {
-
-      const option = document.createElement("option");
-
-      option.value = unit;
-      option.textContent = unit;
-
-      unitSelect.appendChild(option);
-
+  if (units[this.value]) {
+    units[this.value].forEach(unit => {
+      const opt = document.createElement("option");
+      opt.value = unit;
+      opt.textContent = unit;
+      unitSelect.appendChild(opt);
     });
-
   }
 
 });
 
+// =========================
+// PAYMENT BUTTON
+// =========================
 document.getElementById("pesapalBtn").addEventListener("click", function () {
   window.location.href = "https://www.pesapal.com/";
 });
 
-/* FORM SUBMISSION */
+// =========================
+// MAIN FORM HANDLER
+// =========================
+document.addEventListener("DOMContentLoaded", () => {
 
-document.getElementById("bookingForm")
-.addEventListener("submit", function(e){
+  const form = document.getElementById("bookingForm");
+  if (!form) return;
 
-  e.preventDefault();
+  loadCaptcha();
 
-  let consent =
-    document.getElementById("consentCheck").checked;
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
 
-  if(!consent){
+    try {
 
-    alert(
-      "You must accept the Privacy Policy and Terms & Conditions."
-    );
+      // CAPTCHA answer
+      const answer = document.getElementById("captchaAnswer").value;
 
-    return;
-  }
+      const verify = await fetch(`${API}/verify`, {
+        method: "POST",
+        credentials: "include",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ answer })
+      });
 
-  if(!paymentVerified){
+      const verifyData = await verify.json();
 
-    alert("Please complete payment first.");
+      if (!verifyData.success) {
+        alert("Wrong CAPTCHA Answer");
+        loadCaptcha();
+        return;
+      }
 
-    return;
-  }
+      // Consent check
+      if (!document.getElementById("consentCheck").checked) {
+        alert("Accept terms first");
+        return;
+      }
 
-  alert("Workshop booking submitted successfully.");
+      // Payment check (your variable assumed)
+      if (!window.paymentVerified) {
+        alert("Complete payment first");
+        return;
+      }
 
-  /*
-    CONNECT TO GOOGLE SHEETS HERE
-  */
+      // SAVE TO FIREBASE
+      await addDoc(collection(db, "bookings"), {
+        fullName: document.getElementById("fullName").value,
+        course: courseSelect.value,
+        unit: unitSelect.value,
+        createdAt: serverTimestamp()
+      });
+
+      alert("Workshop booking submitted successfully!");
+      form.reset();
+      loadCaptcha();
+
+    } catch (err) {
+      console.error(err);
+      alert("Error submitting form");
+    }
+
+  });
 
 });
 
 </script>
+
 
 </body>
 </html>
