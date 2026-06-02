@@ -386,8 +386,9 @@ Complete Booking
   </div>
 </footer>
 
-  
-                        
+  <!-- InstaSend SDK -->
+<script src="https://unpkg.com/instasend-inlinejs-sdk@3.0.6/build/instasend.min.js"></script>
+
 <script type="module">
 
 // =========================
@@ -501,9 +502,6 @@ courseSelect.addEventListener("change", function () {
 // =========================
 // PAYMENT BUTTON
 // =========================
-<script src="https://unpkg.com/instasend-inlinejs-sdk@3.0.6/build/instasend.min.js"></script>
-
-<script>
 document.getElementById("pesapalBtn").addEventListener("click", function () {
 
   const instaSend = new InstaSend({
@@ -511,7 +509,7 @@ document.getElementById("pesapalBtn").addEventListener("click", function () {
     currency: "KES",
     amount: 1000,
     customer: {
-      email: document.getElementById("email").value || "customer@example.com",
+      email: document.getElementById("email")?.value || "customer@example.com",
       first_name: document.getElementById("firstName")?.value || "Workshop",
       last_name: document.getElementById("lastName")?.value || "Participant"
     }
@@ -519,7 +517,7 @@ document.getElementById("pesapalBtn").addEventListener("click", function () {
 
   instaSend.pay();
 });
-</script>
+
 // =========================
 // MAIN FORM HANDLER
 // =========================
@@ -535,7 +533,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
 
-      // CAPTCHA answer
       const answer = document.getElementById("captchaAnswer").value;
 
       const verify = await fetch(`${API}/verify`, {
@@ -553,19 +550,16 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      // Consent check
       if (!document.getElementById("consentCheck").checked) {
         alert("Accept terms first");
         return;
       }
 
-      // Payment check (your variable assumed)
       if (!window.paymentVerified) {
         alert("Complete payment first");
         return;
       }
 
-      // SAVE TO FIREBASE
       await addDoc(collection(db, "bookings"), {
         fullName: document.getElementById("fullName").value,
         course: courseSelect.value,
@@ -587,6 +581,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 </script>
+                        
 
 
 </body>
