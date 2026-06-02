@@ -193,53 +193,54 @@ button:disabled {
     outline:none;
 }
 #paymentSection {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding: 25px;
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
+padding: 25px;
 }
 
 #paymentSection h3 {
-  font-size: 15px;
-  margin-bottom: 8px;
+font-size: 15px;
+margin-bottom: 8px;
 }
 
 #paymentSection p {
-  margin-bottom: 10px;
-  font-size: 12px;
+margin-bottom: 10px;
+font-size: 12px;
 }
 
 .payment-note {
-  font-size: 10px;
-  color: #666;
-  margin-bottom: 12px;
+font-size: 10px;
+color: #666;
+margin-bottom: 12px;
 }
 
-/* BUTTON STYLE */
-#pesapalBtn {
-  background: #0b1f3a; /* dark navy */
-  color: #ffffff;
-  font-size: 12px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 20px; /* small rounded corners */
-  cursor: pointer;
+/* SELAR BUTTON */
+#selarBtn {
+display: inline-block;
+background: #0b1f3a;
+color: #ffffff;
+font-size: 12px;
+padding: 8px 14px;
+border-radius: 20px;
+text-decoration: none;
+cursor: pointer;
 
-  box-shadow: 0 0 8px rgba(11, 31, 58, 0.6);
-  transition: all 0.25s ease-in-out;
+box-shadow: 0 0 8px rgba(11, 31, 58, 0.6);
+transition: all 0.25s ease-in-out;
 }
 
 /* hover glow effect */
-#pesapalBtn:hover {
-  box-shadow: 0 0 14px rgba(0, 140, 255, 0.8);
-  transform: translateY(-1px);
+#selarBtn:hover {
+box-shadow: 0 0 14px rgba(0, 140, 255, 0.8);
+transform: translateY(-1px);
 }
 
 /* click effect */
-#pesapalBtn:active {
-  transform: scale(0.97);
-  box-shadow: 0 0 6px rgba(0, 140, 255, 0.5);
+#selarBtn:active {
+transform: scale(0.97);
+box-shadow: 0 0 6px rgba(0, 140, 255, 0.5);
 }
 
 /* FOOTER */
@@ -357,14 +358,9 @@ footer a:hover{
 
   <p><strong>Workshop Fee:</strong> KSh 1000</p>
 
-  <small class="payment-note">Secure payment via IntaSend</small>
-
-  <button id="IntaSendBtn" type="button">
-    Pay with IntaSend
-  </button>
+<a id="selarBtn" href="https://selar.com/u04444y7y4" target="_blank">PayBookingFees</a>
 </div>
-
-<button type="submit" id="submitBtn" disabled>
+  <button type="submit" id="submitBtn" disabled>
 Complete Booking
 </button>
 
@@ -386,8 +382,7 @@ Complete Booking
   </div>
 </footer>
 
-  <!-- InstaSend SDK -->
-<script src="https://unpkg.com/instasend-inlinejs-sdk@3.0.6/build/instasend.min.js"></script>
+
 
 <script type="module">
 
@@ -499,24 +494,6 @@ courseSelect.addEventListener("change", function () {
 
 });
 
-// =========================
-// PAYMENT BUTTON
-// =========================
-document.getElementById("IntaSendBtn").addEventListener("click", function () {
-
-  const IntaSend = new IntaSend({
-    publicKey: "ISPubKey_live_e09f65ef-7bde-4e1d-be50-1c2226dfa8fa",
-    currency: "KES",
-    amount: 1000,
-    customer: {
-      email: document.getElementById("email")?.value || "customer@example.com",
-      first_name: document.getElementById("firstName")?.value || "Workshop",
-      last_name: document.getElementById("lastName")?.value || "Participant"
-    }
-  });
-
-  IntaSend.pay();
-});
 
 // =========================
 // MAIN FORM HANDLER
@@ -555,10 +532,15 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      if (!window.paymentVerified) {
-        alert("Complete payment first");
-        return;
-      }
+      const paymentCompleted = confirm(
+"Have you completed the KES 1,000 Workshop Booking Fee payment on Selar?"
+);
+
+if (!paymentCompleted) {
+alert("Please complete payment first.");
+return;
+}
+      
 
       await addDoc(collection(db, "bookings"), {
         fullName: document.getElementById("fullName").value,
