@@ -357,10 +357,10 @@ footer a:hover{
 
   <p><strong>Workshop Fee:</strong> KSh 1000</p>
 
-  <small class="payment-note">Secure payment via Pesapal</small>
+  <small class="payment-note">Secure payment via InstaSend</small>
 
-  <button id="pesapalBtn" type="button">
-    Pay with Pesapal
+  <button id="instasendBtn" type="button">
+    Pay with InstaSend
   </button>
 </div>
 
@@ -501,10 +501,25 @@ courseSelect.addEventListener("change", function () {
 // =========================
 // PAYMENT BUTTON
 // =========================
-document.getElementById("pesapalBtn").addEventListener("click", function () {
-  window.location.href = "https://www.pesapal.com/";
-});
+<script src="https://unpkg.com/instasend-inlinejs-sdk@3.0.6/build/instasend.min.js"></script>
 
+<script>
+document.getElementById("pesapalBtn").addEventListener("click", function () {
+
+  const instaSend = new InstaSend({
+    publicKey: "ISPubKey_live_e09f65ef-7bde-4e1d-be50-1c2226dfa8fa",
+    currency: "KES",
+    amount: 1000,
+    customer: {
+      email: document.getElementById("email").value || "customer@example.com",
+      first_name: document.getElementById("firstName")?.value || "Workshop",
+      last_name: document.getElementById("lastName")?.value || "Participant"
+    }
+  });
+
+  instaSend.pay();
+});
+</script>
 // =========================
 // MAIN FORM HANDLER
 // =========================
