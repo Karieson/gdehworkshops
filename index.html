@@ -504,7 +504,7 @@ courseSelect.addEventListener("change", function () {
 // =========================
 document.getElementById("IntaSendBtn").addEventListener("click", function () {
 
-  const instaSend = new InstaSend({
+  const IntaSend = new IntaSend({
     publicKey: "ISPubKey_live_e09f65ef-7bde-4e1d-be50-1c2226dfa8fa",
     currency: "KES",
     amount: 1000,
@@ -515,7 +515,7 @@ document.getElementById("IntaSendBtn").addEventListener("click", function () {
     }
   });
 
-  instaSend.pay();
+  IntaSend.pay();
 });
 
 // =========================
