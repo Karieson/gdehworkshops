@@ -1,570 +1,1763 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GDEH Application Form</title>
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>GaDEH | Workshop Booking</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+/* =========================================================
+   GaDEH WORKSHOP BOOKING
+   CORPORATE RED • BLACK • AGRICULTURE GREEN
+========================================================= */
+
+:root{
+
+    --red:#c00000;
+    --red-dark:#8f0000;
+
+    --green:#2e7d32;
+    --green-dark:#1b5e20;
+
+    --black:#111111;
+    --black-soft:#222222;
+
+    --white:#ffffff;
+
+    --grey:#f5f5f5;
+    --border:#dddddd;
+
+    --text:#222222;
+    --muted:#666666;
+
+    --shadow:0 4px 18px rgba(0,0,0,.08);
 }
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+
+/* =========================================================
+   BODY
+========================================================= */
 
 body{
-  background:#fff;
-  color:#001f3f;
-  font-size:11px;
-  line-height:1.6;
 
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
+    font-family:
+        "Segoe UI",
+        Tahoma,
+        Geneva,
+        Verdana,
+        sans-serif;
+
+    background:var(--white);
+
+    color:var(--text);
+
+    font-size:.72rem;
+
+    line-height:1.6;
+
+    min-height:100vh;
+
+    display:flex;
+    flex-direction:column;
 }
 
-/* CONTENT WRAPPER */
-.page-content{
-  flex:1;
-  padding:20px;
-}
 
-/* HEADER */
+/* =========================================================
+   HEADER
+========================================================= */
+
 header{
-  position:flex;
-  padding-bottom:20px;
+
+    width:100%;
+
+    padding:.8rem 1rem;
+
+    background:var(--white);
+
+    border-bottom:3px solid var(--red);
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    position:relative;
 }
+
 
 .logo img{
-  width:100px;
+
+    width:5.8rem;
+
+    height:auto;
+
+    display:block;
 }
+
 
 .home-link{
-  position:absolute;
-  top:10px;
-  right:20px;
-  color:#000;
-  text-decoration:none;
-  font-size:11px;
-  font-weight:600;
+
+    color:var(--black);
+
+    text-decoration:none;
+
+    font-size:.68rem;
+
+    font-weight:600;
+
+    border-bottom:1px solid transparent;
+
+    transition:.2s ease;
 }
+
 
 .home-link:hover{
-  text-decoration:underline;
+
+    color:var(--red);
+
+    border-bottom-color:var(--red);
 }
 
-/* TITLE */
-h2{
-  color:#001f3f;
-  font-size:13px;
-  font-weight:600;
-  text-align:center;
-  margin-bottom:10px;
+
+/* =========================================================
+   PAGE CONTENT
+========================================================= */
+
+.page-content{
+
+    flex:1;
+
+    width:100%;
+
+    padding:1.2rem .8rem 2rem;
 }
+
+
+/* =========================================================
+   FORM CONTAINER
+========================================================= */
+
+.form-container{
+
+    width:100%;
+
+    max-width:43rem;
+
+    margin:0 auto;
+
+    background:var(--white);
+
+    border:1px solid var(--border);
+
+    border-top:4px solid var(--green);
+
+    padding:1.1rem;
+
+    box-shadow:var(--shadow);
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.page-title{
+
+    text-align:center;
+
+    color:var(--black);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+    line-height:1.4;
+
+    margin-bottom:.25rem;
+}
+
+
+.page-title span{
+
+    color:var(--red);
+}
+
 
 .note{
-  text-align:center;
-  font-size:10px;
-  color:#444;
-  margin-bottom:15px;
+
+    text-align:center;
+
+    font-size:.64rem;
+
+    color:var(--muted);
+
+    margin-bottom:1rem;
 }
 
-/* FORM */
+
+/* =========================================================
+   FORM
+========================================================= */
+
 form{
-  width:100%;
-  max-width:700px;
-  margin:0 auto;
+
+    width:100%;
 }
+
+
+/* =========================================================
+   FIELDSETS
+========================================================= */
 
 fieldset{
-  border:none;
-  margin-bottom:15px;
-  padding:10px 0;
+
+    border:0;
+
+    border-top:1px solid var(--border);
+
+    padding:1rem 0 .2rem;
+
+    margin:0 0 1rem;
 }
+
 
 legend{
-  font-size:11px;
-  color:#001f3f;
-  font-weight:600;
+
+    padding-right:.5rem;
+
+    color:var(--green-dark);
+
+    font-size:.74rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.02rem;
 }
+
 
 label{
-  display:block;
-  margin-top:8px;
-  margin-bottom:3px;
-  font-size:10px;
-  color:#334;
-}
 
-.required{ color:red; }
+    display:block;
 
-input, select{
-  width:100%;
-  padding:6px;
-  font-size:10px;
-  color:#000;
-  border:1px solid #ccc;
-  border-radius:4px;
+    margin:.55rem 0 .22rem;
+
+    color:var(--black-soft);
+
+    font-size:.67rem;
+
+    font-weight:600;
 }
 
 
-/* BUTTONS */
-button {
-  display: block;
-  margin: 12px auto;
-  padding: 5px 10px;
-  font-size: 10px;
-  border: none;
-  border-radius: 20px;
-  background: #001f3f; /* dark navy */
-  color: #fff;
-  cursor: pointer;
-  box-shadow: 0 0 6px rgba(0, 31, 63, 0.6);
-  transition: 0.3s;
+.required{
+
+    color:var(--red);
+
+    font-weight:700;
 }
 
-/* hover glow */
-button:hover {
-  box-shadow: 0 0 10px rgba(0, 31, 63, 0.9);
-  opacity: 0.9;
+
+/* =========================================================
+   INPUTS
+========================================================= */
+
+input,
+select{
+
+    width:100%;
+
+    height:2rem;
+
+    padding:.35rem .55rem;
+
+    background:var(--white);
+
+    color:var(--black);
+
+    border:1px solid #cfcfcf;
+
+    border-radius:.2rem;
+
+    outline:none;
+
+    font-family:inherit;
+
+    font-size:.68rem;
+
+    transition:
+        border-color .2s ease,
+        box-shadow .2s ease;
 }
 
-/* disabled state */
-button:disabled {
-  background: gray;
-  cursor: not-allowed;
-  box-shadow: none;
+
+input:focus,
+select:focus{
+
+    border-color:var(--green);
+
+    box-shadow:
+        0 0 0 2px rgba(46,125,50,.10);
 }
 
-/* CONSENT */
+
+input::placeholder{
+
+    color:#999;
+
+    font-size:.65rem;
+}
+
+
+/* =========================================================
+   DATE / NUMBER
+========================================================= */
+
+input[type="date"],
+input[type="number"]{
+
+    cursor:pointer;
+}
+
+
+/* =========================================================
+   CONSENT
+========================================================= */
+
 .consent-box{
-  display:flex;
-  align-items:center;
-  gap:8px;
-  margin-top:15px;
+
+    display:flex;
+
+    align-items:flex-start;
+
+    gap:.45rem;
+
+    padding:.7rem;
+
+    margin-top:.5rem;
+
+    background:#fafafa;
+
+    border-left:3px solid var(--green);
 }
 
-.consent-box input{ width:auto; }
 
-/* ===== CAPTCHA ===== */
+.consent-box input{
+
+    width:auto;
+
+    height:auto;
+
+    margin-top:.18rem;
+
+    accent-color:var(--green);
+}
+
+
+.consent-box label{
+
+    margin:0;
+
+    font-size:.64rem;
+
+    line-height:1.5;
+
+    font-weight:500;
+}
+
+
+.consent-box a{
+
+    color:var(--red);
+
+    text-decoration:none;
+}
+
+
+.consent-box a:hover{
+
+    text-decoration:underline;
+}
+
+
+/* =========================================================
+   CAPTCHA
+========================================================= */
 
 .captcha-box{
+
     text-align:center;
-    margin-top:10px;
+
+    margin:1rem 0;
 }
+
 
 .captcha-title{
-    font-size:11px;
-    font-weight:bold;
-    color:#001f3f;
-    margin-bottom:4px;
+
+    color:var(--black);
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    margin-bottom:.35rem;
+
+    text-transform:uppercase;
 }
+
 
 #captchaQuestion{
-    display:inline-block;
-    width:110px;
-    height:28px;
-    line-height:28px;
-    background:#fff;
-    border:2px solid #001f3f;
-    color:red;
-    font-size:14px;
-    font-weight:bold;
-    text-align:center;
-    border-radius:3px;
-    margin-bottom:4px;
+
+    display:block;
+
+    width:8rem;
+
+    height:2rem;
+
+    line-height:2rem;
+
+    margin:0 auto .35rem;
+
+    background:var(--black);
+
+    border:2px solid var(--red);
+
+    color:var(--white);
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    letter-spacing:.08rem;
+
+    border-radius:.2rem;
 }
+
 
 #captchaAnswer{
+
     display:block;
-    width:110px;
-    height:24px;
+
+    width:8rem;
+
+    height:1.8rem;
+
     margin:0 auto;
+
     text-align:center;
-    font-size:12px;
-    color:red;
-    background:#fff;
-    border:2px solid #001f3f;
-    border-radius:3px;
+
+    color:var(--black);
+
+    background:var(--white);
+
+    border:1px solid var(--green);
+
+    border-radius:.2rem;
+
+    font-size:.7rem;
+
+    font-weight:600;
 }
+
 
 #captchaAnswer:focus{
+
     outline:none;
-}
-#paymentSection {
-display: flex;
-flex-direction: column;
-align-items: center;
-text-align: center;
-padding: 25px;
+
+    border-color:var(--red);
+
+    box-shadow:
+        0 0 0 2px rgba(192,0,0,.08);
 }
 
-#paymentSection h3 {
-font-size: 15px;
-margin-bottom: 8px;
+
+/* =========================================================
+   PAYMENT SECTION
+========================================================= */
+
+#paymentSection{
+
+    margin:1rem 0;
+
+    padding:1rem;
+
+    text-align:center;
+
+    background:#fafafa;
+
+    border:1px solid var(--border);
+
+    border-top:3px solid var(--red);
 }
 
-#paymentSection p {
-margin-bottom: 10px;
-font-size: 12px;
+
+#paymentSection h3{
+
+    color:var(--black);
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+    margin-bottom:.25rem;
 }
 
-.payment-note {
-font-size: 10px;
-color: #666;
-margin-bottom: 12px;
+
+#paymentSection p{
+
+    color:var(--text);
+
+    font-size:.72rem;
+
+    margin-bottom:.3rem;
 }
 
-/* SELAR BUTTON */
-#selarBtn {
-display: inline-block;
-background: #0b1f3a;
-color: #ffffff;
-font-size: 12px;
-padding: 8px 14px;
-border-radius: 20px;
-text-decoration: none;
-cursor: pointer;
 
-box-shadow: 0 0 8px rgba(11, 31, 58, 0.6);
-transition: all 0.25s ease-in-out;
+.payment-note{
+
+    color:var(--muted);
+
+    font-size:.61rem;
+
+    margin-bottom:.7rem;
 }
 
-/* hover glow effect */
-#selarBtn:hover {
-box-shadow: 0 0 14px rgba(0, 140, 255, 0.8);
-transform: translateY(-1px);
+
+.fee{
+
+    color:var(--red);
+
+    font-weight:700;
 }
 
-/* click effect */
-#selarBtn:active {
-transform: scale(0.97);
-box-shadow: 0 0 6px rgba(0, 140, 255, 0.5);
+
+/* =========================================================
+   SELAR PAYMENT BUTTON
+========================================================= */
+
+#selarBtn{
+
+    display:inline-block;
+
+    padding:.42rem .85rem;
+
+    background:var(--red);
+
+    color:var(--white);
+
+    border:1px solid var(--red-dark);
+
+    border-radius:1rem;
+
+    text-decoration:none;
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    box-shadow:
+        0 3px 8px rgba(192,0,0,.22);
+
+    transition:.2s ease;
 }
 
-/* FOOTER */
+
+#selarBtn:hover{
+
+    background:var(--red-dark);
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(192,0,0,.28);
+}
+
+
+#selarBtn:active{
+
+    transform:scale(.97);
+}
+
+
+/* =========================================================
+   SUBMIT BUTTON
+========================================================= */
+
+#submitBtn{
+
+    display:block;
+
+    width:auto;
+
+    min-width:9rem;
+
+    margin:1rem auto .3rem;
+
+    padding:.48rem 1rem;
+
+    background:var(--green);
+
+    color:var(--white);
+
+    border:0;
+
+    border-radius:1rem;
+
+    font-family:inherit;
+
+    font-size:.7rem;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 3px 8px rgba(46,125,50,.25);
+
+    transition:.2s ease;
+}
+
+
+#submitBtn:hover:not(:disabled){
+
+    background:var(--green-dark);
+
+    transform:translateY(-1px);
+
+    box-shadow:
+        0 5px 12px rgba(46,125,50,.3);
+}
+
+
+#submitBtn:disabled{
+
+    background:#aaa;
+
+    cursor:not-allowed;
+
+    box-shadow:none;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
 footer{
-  width:100%;
-  background:#fff;
-  text-align:center;
-  padding:18px 18px 30px;
+
+    width:100%;
+
+    background:var(--black);
+
+    color:var(--white);
+
+    text-align:center;
+
+    padding:1rem .8rem;
+
+    border-top:3px solid var(--red);
 }
-font-size:14px;
-  color:#001f3f;
-  font-weight:900;
+
 
 .footer-links{
-  color:#fff;
-  font-size:11px;
-  font-weight: normal;
-  line-height:1.8;
+
+    color:#ddd;
+
+    font-size:.61rem;
+
+    line-height:1.8;
 }
+
 
 footer a{
-  color:#001f3f;
-  text-decoration:none;
-  font-size:10px;
-  font-weight:500;
+
+    color:var(--white);
+
+    text-decoration:none;
+
+    font-size:.61rem;
+
+    font-weight:500;
 }
 
+
 footer a:hover{
-  color:#001f3f;
-  text-decoration:underline;
+
+    color:#8bc34a;
+
+    text-decoration:underline;
 }
+
+
+.footer-contact{
+
+    margin-top:.25rem;
+}
+
+
+/* =========================================================
+   AGRICULTURE ACCENT
+========================================================= */
+
+.agriculture-line{
+
+    width:3rem;
+
+    height:2px;
+
+    background:var(--green);
+
+    margin:.5rem auto .8rem;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width:480px){
+
+    body{
+
+        font-size:.7rem;
+    }
+
+    header{
+
+        padding:.7rem .75rem;
+    }
+
+    .logo img{
+
+        width:5rem;
+    }
+
+    .home-link{
+
+        font-size:.62rem;
+    }
+
+    .page-content{
+
+        padding:.8rem .55rem 1.5rem;
+    }
+
+    .form-container{
+
+        padding:.8rem;
+
+        box-shadow:none;
+    }
+
+    .page-title{
+
+        font-size:.88rem;
+    }
+
+    .note{
+
+        font-size:.6rem;
+    }
+
+    legend{
+
+        font-size:.68rem;
+    }
+
+    label{
+
+        font-size:.63rem;
+    }
+
+    input,
+    select{
+
+        font-size:.65rem;
+
+        height:1.9rem;
+    }
+
+}
+
+
+/* =========================================================
+   PRINT
+========================================================= */
+
+@media print{
+
+    header,
+    footer,
+    #paymentSection,
+    #submitBtn{
+
+        display:none;
+    }
+
+    .form-container{
+
+        box-shadow:none;
+
+        border:0;
+    }
+}
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header>
-  <div class="logo">
-    <img src="gdeh_logo.png" alt="GDEH Logo">
-  </div>
-  <a href="https://garissadigitaltraining.onrender.com" class="home-link">Back to Home</a>
+
+    <div class="logo">
+
+        <img
+            src="gadeh_logo.png"
+            alt="GADEH Logo"
+        >
+
+    </div>
+
+
+    <a
+        href="https://garissadigitaltraining.onrender.com"
+        class="home-link"
+    >
+        Back to Home
+    </a>
+
 </header>
 
-<div class="page-content">
 
-<h2>Garissa Digital Empowerment Hub CBO Workshops Booking Form</h2>
 
-<div class="note">Applicant Must Give Consent Before Booking</div>
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
 
-<form id="bookingForm">
+<main class="page-content">
 
-<fieldset>
-<legend>Participant Information</legend>
 
-<label>First Name <span class="required">*</span></label>
-<input type="text" id="firstName" required>
+<div class="form-container">
 
-<label>Last Name <span class="required">*</span></label>
-<input type="text" id="lastName" required>
 
-<label>Email Address <span class="required">*</span></label>
-<input type="email" id="email" required>
+    <h1 class="page-title">
+        Workshop <span>Booking Form</span>
+    </h1>
 
-<label>Phone Number <span class="required">*</span></label>
-<input type="tel" id="phone" required>
 
-</fieldset>
+    <div class="agriculture-line"></div>
 
-<fieldset>
-<legend>Workshop Booking</legend>
 
-<label>Select Course <span class="required">*</span></label>
-<select id="courseSelect" required>
-  <option value="">Choose Course</option>
-  <option value="Computer Packages">Computer Packages</option>
-  <option value="Agro Entrepreneurship">Agro Entrepreneurship</option>
-  <option value="Smartphone Literacy">Smartphone Literacy</option>
-  <option value="ICT Short Courses">ICT Short Courses</option>
-</select>
+    <p class="note">
+        Please provide accurate information and give consent
+        before completing your workshop booking.
+    </p>
 
-<label>Select Unit <span class="required">*</span></label>
-<select id="unitSelect" required>
-  <option value="">Choose Unit</option>
-</select>
 
-<label>Preferred Weekend <span class="required">*</span></label>
-<input type="date" id="weekendDate" required>
 
-<label>Number of Seats</label>
-<input type="number" id="seats" min="1" max="30" value="1">
+    <!-- =====================================================
+         BOOKING FORM
+    ====================================================== -->
 
-</fieldset>
+    <form id="bookingForm">
 
-<div class="consent-box">
-  <input type="checkbox" id="consentCheck" required>
-  <label for="consentCheck">
-    I accept the Privacy Policy and Terms & Conditions *
-  </label>
+
+        <!-- =================================================
+             PARTICIPANT INFORMATION
+        ================================================== -->
+
+        <fieldset>
+
+            <legend>
+                Participant Information
+            </legend>
+
+
+            <label for="firstName">
+                First Name
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="firstName"
+                placeholder="Enter first name"
+                autocomplete="given-name"
+                required
+            >
+
+
+            <label for="lastName">
+                Last Name
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="text"
+                id="lastName"
+                placeholder="Enter last name"
+                autocomplete="family-name"
+                required
+            >
+
+
+            <label for="email">
+                Email Address
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Enter email address"
+                autocomplete="email"
+                required
+            >
+
+
+            <label for="phone">
+                Phone Number
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="e.g. 07XXXXXXXX"
+                autocomplete="tel"
+                required
+            >
+
+        </fieldset>
+
+
+
+        <!-- =================================================
+             WORKSHOP BOOKING
+        ================================================== -->
+
+        <fieldset>
+
+            <legend>
+                Workshop Booking
+            </legend>
+
+
+            <label for="courseSelect">
+                Select Course
+                <span class="required">*</span>
+            </label>
+
+            <select
+                id="courseSelect"
+                required
+            >
+
+                <option value="">
+                    Choose Course
+                </option>
+
+                <option value="Computer Packages">
+                    Computer Packages
+                </option>
+
+                <option value="Agro Entrepreneurship">
+                    Agro Entrepreneurship
+                </option>
+
+                <option value="Smartphone Literacy">
+                    Smartphone Literacy
+                </option>
+
+                <option value="ICT Short Courses">
+                    ICT Short Courses
+                </option>
+
+            </select>
+
+
+
+            <label for="unitSelect">
+                Select Unit
+                <span class="required">*</span>
+            </label>
+
+            <select
+                id="unitSelect"
+                required
+            >
+
+                <option value="">
+                    Choose Unit
+                </option>
+
+            </select>
+
+
+
+            <label for="weekendDate">
+                Preferred Weekend
+                <span class="required">*</span>
+            </label>
+
+            <input
+                type="date"
+                id="weekendDate"
+                required
+            >
+
+
+
+            <label for="seats">
+                Number of Seats
+            </label>
+
+            <input
+                type="number"
+                id="seats"
+                min="1"
+                max="30"
+                value="1"
+            >
+
+        </fieldset>
+
+
+
+        <!-- =================================================
+             CONSENT
+        ================================================== -->
+
+        <div class="consent-box">
+
+            <input
+                type="checkbox"
+                id="consentCheck"
+                required
+            >
+
+            <label for="consentCheck">
+
+                I accept the
+                <a href="privacy_terms.html">
+                    Privacy Policy
+                </a>
+                and
+                <a href="privacy_terms.html">
+                    Terms & Conditions
+                </a>.
+
+                <span class="required">*</span>
+
+            </label>
+
+        </div>
+
+
+
+        <!-- =================================================
+             CAPTCHA
+        ================================================== -->
+
+        <div class="captcha-box">
+
+            <div class="captcha-title">
+                Security Verification
+            </div>
+
+
+            <div id="captchaQuestion">
+                Loading...
+            </div>
+
+
+            <input
+                type="text"
+                id="captchaAnswer"
+                placeholder="Answer"
+                autocomplete="off"
+            >
+
+        </div>
+
+
+
+        <!-- =================================================
+             PAYMENT
+        ================================================== -->
+
+        <div id="paymentSection">
+
+            <h3>
+                Workshop Payment
+            </h3>
+
+
+            <p>
+                <strong>
+                    Workshop Fee:
+                </strong>
+
+                <span class="fee">
+                    KSh 1,000
+                </span>
+            </p>
+
+
+            <p class="payment-note">
+
+                Complete the workshop payment through
+                Selar before submitting your booking.
+
+            </p>
+
+
+            <a
+                id="selarBtn"
+                href="https://selar.com/u04444y7y4"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                Pay Booking Fee
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             SUBMIT
+        ================================================== -->
+
+        <button
+            type="submit"
+            id="submitBtn"
+            disabled
+        >
+            Complete Booking
+        </button>
+
+
+    </form>
+
 </div>
 
+</main>
 
-<!-- ===== MATH CAPTCHA ===== -->
 
-<div class="captcha-box">
-    <div class="captcha-title">Solve This</div>
 
-    <div id="captchaQuestion">8 + 5 = ?</div>
-
-    <input type="text" id="captchaAnswer" placeholder="Answer">
-</div>
-
-</div>
-<div id="paymentSection">
-  <h3>Workshop Payment</h3>
-
-  <p><strong>Workshop Fee:</strong> KSh 1000</p>
-
-<a id="selarBtn" href="https://selar.com/u04444y7y4" target="_blank">PayBookingFees</a>
-</div>
-  <button type="submit" id="submitBtn" disabled>
-Complete Booking
-</button>
-
-</form>
-
-</div>
-  
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer>
-  <div class="footer-links">
-    © 2026 Garissa Digital Empowerment Hub CBO | All Rights Reserved
-    <br>
-    <a href="privacy_terms.html">Privacy Policy</a> |
-    <a href="privacy_terms.html">Terms & Conditions</a>
-  </div>
-  <div>
-    <a href="contact.html">Contact Us</a>
-  </div>
-  </div>
+
+    <div class="footer-links">
+
+        © 2026 Garissa Digital Empowerment Hub CBO
+        | All Rights Reserved
+
+        <br>
+
+        <a href="privacy_terms.html">
+            Privacy Policy
+        </a>
+
+        |
+
+        <a href="privacy_terms.html">
+            Terms & Conditions
+        </a>
+
+    </div>
+
+
+    <div class="footer-contact">
+
+        <a href="contact.html">
+            Contact Us
+        </a>
+
+    </div>
+
 </footer>
 
 
 
+<!-- =========================================================
+     FIREBASE + FORM JAVASCRIPT
+========================================================= -->
+
 <script type="module">
 
-// =========================
-// FIREBASE SETUP
-// =========================
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+/* =========================================================
+   FIREBASE SETUP
+========================================================= */
+
 import {
-  getFirestore,
-  collection,
-  addDoc,
-  serverTimestamp
-} from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+    initializeApp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-app.js";
+
+
+import {
+    getFirestore,
+    collection,
+    addDoc,
+    serverTimestamp
+}
+from "https://www.gstatic.com/firebasejs/12.0.0/firebase-firestore.js";
+
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBSjwYT-zi33Pu1m-fQIqS3RVWQOzqbtw",
-  authDomain: "gdehworkshops.firebaseapp.com",
-  projectId: "gdehworkshops",
-  storageBucket: "gdehworkshops.firebasestorage.app",
-  messagingSenderId: "296415841441",
-  appId: "1:296415841441:web:5c3f8447a311876b07f4e0",
-  measurementId: "G-CKH6CVNXRP"
+
+    apiKey:
+        "AIzaSyBSjwYT-zi33Pu1m-fQIqS3RVWQOzqbtw",
+
+    authDomain:
+        "gdehworkshops.firebaseapp.com",
+
+    projectId:
+        "gdehworkshops",
+
+    storageBucket:
+        "gdehworkshops.firebasestorage.app",
+
+    messagingSenderId:
+        "296415841441",
+
+    appId:
+        "1:296415841441:web:5c3f8447a311876b07f4e0",
+
+    measurementId:
+        "G-CKH6CVNXRP"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
 
-// =========================
-// CAPTCHA API
-// =========================
-const API = "https://math-captcha-backend.onrender.com";
-
-async function loadCaptcha() {
-  try {
-    const res = await fetch(`${API}/captcha`, {
-      credentials: "include"
-    });
-    const data = await res.json();
-    document.getElementById("captchaQuestion").innerText = data.question;
-  } catch (err) {
-    console.error(err);
-  }
-}
-
-// =========================
-// COURSE → UNITS
-// =========================
-const units = {
-  "Computer Packages": [
-    "CP101 - Introduction to Computers",
-    "CP102 - Microsoft Word",
-    "CP103 - Microsoft Excel",
-    "CP104 - Microsoft PowerPoint",
-    "CP105 - Internet & Email Applications",
-    "CP106 - Operating Systems",
-    "CP107 - Data Entry Skills",
-    "CP108 - Computer Maintenance"
-  ],
-
-  "Agro Entrepreneurship": [
-    "AE101 - Agriculture Basics",
-    "AE102 - Agribusiness",
-    "AE103 - Farm Records",
-    "AE104 - Crop Production",
-    "AE105 - Livestock Management",
-    "AE106 - Marketing",
-    "AE107 - Finance",
-    "AE108 - Sustainable Farming"
-  ],
-
-  "Smartphone Literacy": [
-    "SL101 - Smartphone Basics",
-    "SL102 - Android Use",
-    "SL103 - Internet Use",
-    "SL104 - Social Media",
-    "SL105 - Mobile Money",
-    "SL106 - Security",
-    "SL107 - Photography",
-    "SL108 - Communication"
-  ],
-
-  "ICT Short Courses": [
-    "ICT101 - ICT Intro",
-    "ICT102 - Networking",
-    "ICT103 - Web Design",
-    "ICT104 - Graphic Design",
-    "ICT105 - Databases",
-    "ICT106 - Cybersecurity",
-    "ICT107 - Programming",
-    "ICT108 - Digital Marketing"
-  ]
-};
-
-const courseSelect = document.getElementById("courseSelect");
-const unitSelect = document.getElementById("unitSelect");
-
-courseSelect.addEventListener("change", function () {
-
-  unitSelect.innerHTML = '<option value="">Choose Unit</option>';
-
-  if (units[this.value]) {
-    units[this.value].forEach(unit => {
-      const opt = document.createElement("option");
-      opt.value = unit;
-      opt.textContent = unit;
-      unitSelect.appendChild(opt);
-    });
-  }
-
-});
+const app =
+    initializeApp(firebaseConfig);
 
 
-// =========================
-// MAIN FORM HANDLER
-// =========================
-document.addEventListener("DOMContentLoaded", () => {
+const db =
+    getFirestore(app);
 
-  const form = document.getElementById("bookingForm");
-  if (!form) return;
 
-  loadCaptcha();
 
-  form.addEventListener("submit", async (e) => {
-    e.preventDefault();
+/* =========================================================
+   CAPTCHA API
+========================================================= */
 
-    try {
+const API =
+    "https://math-captcha-backend.onrender.com";
 
-      const answer = document.getElementById("captchaAnswer").value;
 
-      const verify = await fetch(`${API}/verify`, {
-        method: "POST",
-        credentials: "include",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ answer })
-      });
+async function loadCaptcha(){
 
-      const verifyData = await verify.json();
+    try{
 
-      if (!verifyData.success) {
-        alert("Wrong CAPTCHA Answer");
-        loadCaptcha();
-        return;
-      }
+        const res =
+            await fetch(
+                `${API}/captcha`,
+                {
+                    credentials:"include"
+                }
+            );
 
-      if (!document.getElementById("consentCheck").checked) {
-        alert("Accept terms first");
-        return;
-      }
 
-      const paymentCompleted = confirm(
-"Have you completed the KES 1,000 Workshop Booking Fee payment on Selar?"
-);
+        const data =
+            await res.json();
 
-if (!paymentCompleted) {
-alert("Please complete payment first.");
-return;
-}
-      
 
-      await addDoc(collection(db, "bookings"), {
-        fullName: document.getElementById("fullName").value,
-        course: courseSelect.value,
-        unit: unitSelect.value,
-        createdAt: serverTimestamp()
-      });
+        document.getElementById(
+            "captchaQuestion"
+        ).innerText =
+            data.question;
 
-      alert("Workshop booking submitted successfully!");
-      form.reset();
-      loadCaptcha();
 
-    } catch (err) {
-      console.error(err);
-      alert("Error submitting form");
+    }catch(err){
+
+        console.error(
+            "CAPTCHA error:",
+            err
+        );
+
+        document.getElementById(
+            "captchaQuestion"
+        ).innerText =
+            "Try Again";
+
     }
 
-  });
+}
 
-});
+
+
+/* =========================================================
+   COURSE → UNITS
+========================================================= */
+
+const units = {
+
+    "Computer Packages":[
+
+        "CP101 - Introduction to Computers",
+        "CP102 - Microsoft Word",
+        "CP103 - Microsoft Excel",
+        "CP104 - Microsoft PowerPoint",
+        "CP105 - Internet & Email Applications",
+        "CP106 - Operating Systems",
+        "CP107 - Data Entry Skills",
+        "CP108 - Computer Maintenance"
+
+    ],
+
+
+    "Agro Entrepreneurship":[
+
+        "AE101 - Agriculture Basics",
+        "AE102 - Agribusiness",
+        "AE103 - Farm Records",
+        "AE104 - Crop Production",
+        "AE105 - Livestock Management",
+        "AE106 - Marketing",
+        "AE107 - Finance",
+        "AE108 - Sustainable Farming"
+
+    ],
+
+
+    "Smartphone Literacy":[
+
+        "SL101 - Smartphone Basics",
+        "SL102 - Android Use",
+        "SL103 - Internet Use",
+        "SL104 - Social Media",
+        "SL105 - Mobile Money",
+        "SL106 - Security",
+        "SL107 - Photography",
+        "SL108 - Communication"
+
+    ],
+
+
+    "ICT Short Courses":[
+
+        "ICT101 - ICT Intro",
+        "ICT102 - Networking",
+        "ICT103 - Web Design",
+        "ICT104 - Graphic Design",
+        "ICT105 - Databases",
+        "ICT106 - Cybersecurity",
+        "ICT107 - Programming",
+        "ICT108 - Digital Marketing"
+
+    ]
+
+};
+
+
+
+/* =========================================================
+   FORM ELEMENTS
+========================================================= */
+
+const form =
+    document.getElementById(
+        "bookingForm"
+    );
+
+
+const courseSelect =
+    document.getElementById(
+        "courseSelect"
+    );
+
+
+const unitSelect =
+    document.getElementById(
+        "unitSelect"
+    );
+
+
+const consentCheck =
+    document.getElementById(
+        "consentCheck"
+    );
+
+
+const captchaAnswer =
+    document.getElementById(
+        "captchaAnswer"
+    );
+
+
+const submitBtn =
+    document.getElementById(
+        "submitBtn"
+    );
+
+
+
+/* =========================================================
+   COURSE CHANGE
+========================================================= */
+
+courseSelect.addEventListener(
+    "change",
+    function(){
+
+        unitSelect.innerHTML =
+            '<option value="">Choose Unit</option>';
+
+
+        if(units[this.value]){
+
+            units[this.value].forEach(
+                unit => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+
+                    option.value =
+                        unit;
+
+
+                    option.textContent =
+                        unit;
+
+
+                    unitSelect.appendChild(
+                        option
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   ENABLE SUBMIT ONLY WHEN CONSENT + CAPTCHA EXIST
+========================================================= */
+
+function updateSubmitState(){
+
+    const captchaFilled =
+        captchaAnswer.value.trim() !== "";
+
+
+    submitBtn.disabled =
+        !consentCheck.checked ||
+        !captchaFilled;
+
+}
+
+
+consentCheck.addEventListener(
+    "change",
+    updateSubmitState
+);
+
+
+captchaAnswer.addEventListener(
+    "input",
+    updateSubmitState
+);
+
+
+
+/* =========================================================
+   FORM SUBMISSION
+========================================================= */
+
+form.addEventListener(
+    "submit",
+    async function(e){
+
+        e.preventDefault();
+
+
+        try{
+
+
+            /* ---------------------------------------------
+               CAPTCHA VERIFICATION
+            --------------------------------------------- */
+
+            const answer =
+                captchaAnswer.value.trim();
+
+
+            const verify =
+                await fetch(
+                    `${API}/verify`,
+                    {
+
+                        method:"POST",
+
+                        credentials:"include",
+
+                        headers:{
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body:
+                            JSON.stringify({
+                                answer
+                            })
+
+                    }
+                );
+
+
+            const verifyData =
+                await verify.json();
+
+
+            if(!verifyData.success){
+
+                alert(
+                    "Wrong CAPTCHA answer. Please try again."
+                );
+
+                captchaAnswer.value = "";
+
+                await loadCaptcha();
+
+                updateSubmitState();
+
+                return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               CONSENT
+            --------------------------------------------- */
+
+            if(
+                !consentCheck.checked
+            ){
+
+                alert(
+                    "Please accept the Privacy Policy and Terms & Conditions."
+                );
+
+                return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               PAYMENT CONFIRMATION
+            --------------------------------------------- */
+
+            const paymentCompleted =
+                confirm(
+                    "Have you completed the KSh 1,000 Workshop Booking Fee payment on Selar?"
+                );
+
+
+            if(!paymentCompleted){
+
+                alert(
+                    "Please complete the payment first."
+                );
+
+                return;
+
+            }
+
+
+
+            /* ---------------------------------------------
+               FORM DATA
+            --------------------------------------------- */
+
+            const firstName =
+                document.getElementById(
+                    "firstName"
+                ).value.trim();
+
+
+            const lastName =
+                document.getElementById(
+                    "lastName"
+                ).value.trim();
+
+
+            const fullName =
+                `${firstName} ${lastName}`.trim();
+
+
+            const email =
+                document.getElementById(
+                    "email"
+                ).value.trim();
+
+
+            const phone =
+                document.getElementById(
+                    "phone"
+                ).value.trim();
+
+
+            const course =
+                courseSelect.value;
+
+
+            const unit =
+                unitSelect.value;
+
+
+            const weekendDate =
+                document.getElementById(
+                    "weekendDate"
+                ).value;
+
+
+            const seats =
+                Number(
+                    document.getElementById(
+                        "seats"
+                    ).value
+                );
+
+
+
+            /* ---------------------------------------------
+               FIRESTORE
+            --------------------------------------------- */
+
+            await addDoc(
+                collection(
+                    db,
+                    "bookings"
+                ),
+                {
+
+                    firstName,
+
+                    lastName,
+
+                    fullName,
+
+                    email,
+
+                    phone,
+
+                    course,
+
+                    unit,
+
+                    weekendDate,
+
+                    seats,
+
+                    paymentConfirmed:true,
+
+                    paymentAmount:1000,
+
+                    consent:true,
+
+                    createdAt:
+                        serverTimestamp()
+
+                }
+            );
+
+
+
+            /* ---------------------------------------------
+               SUCCESS
+            --------------------------------------------- */
+
+            alert(
+                "Workshop booking submitted successfully!"
+            );
+
+
+            form.reset();
+
+
+            unitSelect.innerHTML =
+                '<option value="">Choose Unit</option>';
+
+
+            await loadCaptcha();
+
+
+            updateSubmitState();
+
+
+        }catch(err){
+
+            console.error(
+                "Booking submission error:",
+                err
+            );
+
+
+            alert(
+                "There was an error submitting your booking. Please try again."
+            );
+
+        }
+
+    }
+);
+
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+loadCaptcha();
+
+updateSubmitState();
+
 
 </script>
-                        
 
 
 </body>
+
 </html>
